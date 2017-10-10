@@ -8,7 +8,7 @@ import fr.lithie.matchup.entities.Role;
 import fr.lithie.matchup.entities.Validity;
 import fr.lithie.matchup.entities.base.BaseEntity;
 
-public class AdministratorDAO extends RegisteredUserDAO {
+public class AdministratorDAO extends UserDAO {
 	
 	public static final String TABLE ="administrator";
 	public static final String ID ="id_admin";

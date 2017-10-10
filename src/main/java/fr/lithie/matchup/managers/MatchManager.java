@@ -51,9 +51,15 @@ public class MatchManager {
 		modePro = false;
 	}
 	
+	/**
+	 * (not completed)
+	 * Simple matching of skills with a limit of 20 operations
+	 * @return list of result
+	 */
 	public List<Matching> basic() {
 		List<Matching> result = new ArrayList<>();
 		
+		//Professional matching
 		if (modePro) {
 			if (cList.size()<20) {
 				for (BaseEntity user : cList) {

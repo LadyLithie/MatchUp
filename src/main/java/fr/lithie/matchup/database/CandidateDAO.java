@@ -13,7 +13,7 @@ import fr.lithie.matchup.entities.Validity;
 import fr.lithie.matchup.entities.base.BaseEntity;
 
 
-public class CandidateDAO extends RegisteredUserDAO {
+public class CandidateDAO extends UserDAO {
 	
 	public static final String TABLE = "candidate";
 	public static final String ID = "id_candidate";

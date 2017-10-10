@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import fr.lithie.matchup.database.ProposalDAO;
-import fr.lithie.matchup.database.RegisteredUserDAO;
+import fr.lithie.matchup.database.UserDAO;
 import fr.lithie.matchup.entities.Administrator;
 import fr.lithie.matchup.entities.Candidate;
 import fr.lithie.matchup.entities.Enterprise;
@@ -98,7 +98,7 @@ public class LoginController extends BaseController {
 					}
 				} else {
 					// normal version must consult the database for a user with those datas
-					RegisteredUserDAO userDAO = new RegisteredUserDAO();
+					UserDAO userDAO = new UserDAO();
 					user = userDAO.connection(view.getTextFieldLogin().getText(),
 							view.getTextFieldPwd().getText());
 

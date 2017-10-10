@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.lithie.matchup.database.DBManager;
-import fr.lithie.matchup.database.IDAOBase;
 import fr.lithie.matchup.entities.base.BaseEntity;
 
 /**

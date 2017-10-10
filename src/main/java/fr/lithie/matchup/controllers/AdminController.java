@@ -27,6 +27,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 
+import org.passay.CharacterRule;
+import org.passay.EnglishCharacterData;
+import org.passay.PasswordGenerator;
+
 import fr.lithie.matchup.database.AdministratorDAO;
 import fr.lithie.matchup.database.CandidateDAO;
 import fr.lithie.matchup.database.EnterpriseDAO;
@@ -300,13 +304,14 @@ public class AdminController extends BaseController {
 							"Confirmez le reset du mot de passe de " + user.getName(), "Validation",
 							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					if (res == JOptionPane.YES_OPTION) {
-					//	PasswordGenerator pwdGen = new PasswordGenerator();
-					//	ArrayList<CharacterRule> rule = new ArrayList<>();
-					//	rule.add(new CharacterRule(EnglishCharacterData.Alphabetical, 5));
-					//	rule.add(new CharacterRule(EnglishCharacterData.Digit, 2));
-					//	String pwd = pwdGen.generatePassword(8, rule);
-					//	JOptionPane.showMessageDialog(null, "Le nouveau mot de passe est : "+pwd, "Suppression",
-					//			JOptionPane.INFORMATION_MESSAGE);
+						PasswordGenerator pwdGen = new PasswordGenerator();
+						ArrayList<CharacterRule> rule = new ArrayList<>();
+						rule.add(new CharacterRule(EnglishCharacterData.Alphabetical, 5));
+						rule.add(new CharacterRule(EnglishCharacterData.Digit, 2));
+						String pwd = pwdGen.generatePassword(8, rule);
+						JOptionPane.showMessageDialog(null, "Le nouveau mot de passe est : "+pwd, "Suppression",
+								JOptionPane.INFORMATION_MESSAGE);
+						user.setPassword(pwd);
 						// DAO with instance :(
 						BaseDAO dao;
 						if (user instanceof Enterprise) {
