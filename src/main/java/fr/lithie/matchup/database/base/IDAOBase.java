@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.lithie.matchup.database;
+package fr.lithie.matchup.database.base;
 
 import java.sql.ResultSet;
 import java.util.List;
