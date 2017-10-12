@@ -54,20 +54,7 @@ public class UserDAO extends BaseDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//Test dans la table Headhunter
-		rs = executeRequest("SELECT * FROM " + HeadhunterDAO.TABLE + " WHERE " + HeadhunterDAO.LOGIN +" = '" + login + "' AND " + HeadhunterDAO.PASSWORD + " = '" + password + "'");
-		try {
-			if (rs.next()) {
-				user = new Headhunter();
-				user.setId(rs.getDouble(HeadhunterDAO.ID));
-				HeadhunterDAO headhunterDAO = new HeadhunterDAO();
-				user = (Headhunter) headhunterDAO.get(user.getId());
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		
 		//Test dans la table Candidate
 		rs = executeRequest("SELECT * FROM " + CandidateDAO.TABLE + " WHERE " + CandidateDAO.LOGIN +" = '" +  login + "' AND " + CandidateDAO.PASSWORD + " = '" + password + "'");

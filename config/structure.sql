@@ -83,7 +83,7 @@ CREATE TABLE company(
 
 CREATE TABLE job(
         id            BigInt Auto_increment  NOT NULL ,
-        name          Varchar (100) NOT NULL ,
+        title          Varchar (100) NOT NULL ,
         presentation  text ,
         contract_type Varchar (100) ,
         created_at    Datetime NOT NULL ,

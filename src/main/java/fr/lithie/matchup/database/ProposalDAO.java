@@ -12,6 +12,7 @@ import fr.lithie.matchup.database.base.BaseDAO;
 import fr.lithie.matchup.entities.ContractType;
 import fr.lithie.matchup.entities.Company;
 import fr.lithie.matchup.entities.Job;
+import fr.lithie.matchup.entities.Location;
 import fr.lithie.matchup.entities.Skill;
 import fr.lithie.matchup.entities.base.BaseEntity;
 
@@ -21,14 +22,16 @@ import fr.lithie.matchup.entities.base.BaseEntity;
  */
 public class ProposalDAO extends BaseDAO {
 		public static final String TABLE = "job";
-		public static final String ID = "id_job";
-		public static final String NAME = "title_job";
-		public static final String PRESENTATION = "presentation_job";
-		public static final String ADDRESS = "address";
+		public static final String ID = "id";
+		public static final String NAME = "title";
+		public static final String PRESENTATION = "presentation";
+		public static final String CONTRACT = "contract_type";
 		
-		public static final String CONTRACT = "contract_id";
-		public static final String ENTERPRISE = "enterprise_id";
-		public static final String HEADHUNTER = "headhunter_id";
+		public static final String CREA_DATE = "created_at";
+		public static final String UPDATE = "updated_at";
+
+		public static final String COMPANY = "company_id";
+		public static final String ADDRESS = "location_id";
 
 		public static final String JOB_SKILL = "job_skill";
 		public static final String ID_JOB = "job_id";
@@ -49,11 +52,11 @@ public class ProposalDAO extends BaseDAO {
 				job.setId(resultSet.getDouble(ID));
 				job.setName(resultSet.getString(NAME));
 				job.setPresentation(resultSet.getString(PRESENTATION));
-				job.setLocalization(resultSet.getString(ADDRESS));
+				job.setContractType(new ContractType(resultSet.getString(CONTRACT)));
+				LocationDAO lDao = new LocationDAO();
+				job.setLocalization((Location) lDao.get(resultSet.getDouble(ADDRESS)));
 				CompanyDAO enterprise = new CompanyDAO();
-				job.setCompany((Company) enterprise.get(resultSet.getDouble(ENTERPRISE)));
-				ContractDAO cDao = new ContractDAO();
-				job.setContractType((ContractType) cDao.get(resultSet.getDouble(CONTRACT)));
+				job.setCompany((Company) enterprise.get(resultSet.getDouble(COMPANY)));
 				//missing DAOheadhunter
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -72,32 +75,14 @@ public class ProposalDAO extends BaseDAO {
 			Job job = ((Job)item);
 			request = String.valueOf(job.getId());
 			request += ",'"+job.getName()+"'";
-			request += ","+(job.getLocalization() == null ? "null" : "'"+job.getLocalization()+"'");	
-//			if(job.getLocalization() == null) {
-//				request += ",null";				
-//			}else {
-//				request += ",'"+job.getLocalization()+"'";
-//			}
-			if(job.getPresentation() == null) {
-				request += ",null";				
-			}else {
-				request += ",'"+job.getPresentation()+"'";
-			}
-			if(job.getContractType() == null) {
-				request += ",null";				
-			}else {
-				request += ",'"+job.getContractType().getId()+"'";
-			}
-			if(job.getCompany() == null) {
-				request += ",null";				
-			}else {
-				request += ",'"+job.getCompany().getId()+"'";				
-			}
-			if(job.getHeadhunter() == null) {
-				request += ",null";				
-			}else {
-				request += ",'"+job.getHeadhunter().getId()+"'";
-			}
+			request += ","+(job.getPresentation() == null ? "null" : "'"+job.getPresentation()+"'");	
+			request += ","+(job.getContractType() == null ? "null" : "'"+job.getContractType()+"'");
+			
+			//For statistics
+			request += ", NOW(), NOW()";
+	
+			request += ","+(job.getCompany() == null ? "null" : "'"+job.getCompany().getId()+"'");	
+			request += ","+(job.getLocalization() == null ? "null" : "'"+job.getLocalization().getId()+"'");	
 			
 			return request;
 
@@ -112,32 +97,17 @@ public class ProposalDAO extends BaseDAO {
 			
 			Job job = ((Job)item);
 			request = NAME +" = '"+job.getName()+"',";
-			if(job.getLocalization() == null) {
-				request += ADDRESS +" = null,";
-			}else {
-				request += ADDRESS +" = '"+job.getLocalization()+"',";
-			}
-			request += PRESENTATION + (job.getPresentation() ==  null ? " = null," : " = '"+job.getPresentation()+"',");
-//			if(job.getPresentation() == null) {
-//				request += PRESENTATION +" = null,";
+//			if(job.getLocalization() == null) {
+//				request += ADDRESS +" = null,";
 //			}else {
-//				request += PRESENTATION +" = '"+job.getPresentation()+"',";
+//				request += ADDRESS +" = '"+job.getLocalization()+"',";
 //			}
-			if(job.getContractType() == null) {
-				request += CONTRACT +" = null,";
-			}else {
-				request += CONTRACT +" = '"+job.getContractType().getId()+"',";
-			}
-			if(job.getCompany() == null) {
-				request += ENTERPRISE +" = null,";
-			}else {
-				request += ENTERPRISE +" = '"+job.getCompany().getId()+"',";
-			}
-			if(job.getHeadhunter() == null) {
-				request += HEADHUNTER +" = null";
-			}else {
-				request += HEADHUNTER +" = '"+job.getHeadhunter().getId()+"'";
-			}
+			request += ADDRESS + (job.getLocalization() ==  null ? " = null," : " = '"+job.getLocalization().getId()+"',");
+			request += PRESENTATION + (job.getPresentation() ==  null ? " = null," : " = '"+job.getPresentation()+"',");
+			request += CONTRACT + (job.getContractType() ==  null ? " = null," : " = '"+job.getContractType().getName()+"',");
+			request += COMPANY + (job.getCompany() ==  null ? " = null," : " = '"+job.getCompany().getId()+"',");
+			request += UPDATE + " = NOW()";
+
 			
 			return request;
 		}
@@ -150,7 +120,7 @@ public class ProposalDAO extends BaseDAO {
 		public ArrayList<Job> getByCompany(double id) {
 			ArrayList<Job> jobs = new ArrayList<>();
 			ResultSet rs = executeRequest("SELECT * FROM " + TABLE
-					+ " WHERE " + ENTERPRISE + " = " + id);
+					+ " WHERE " + COMPANY + " = " + id);
 
 			try {
 				while (rs.next()) {
@@ -165,26 +135,6 @@ public class ProposalDAO extends BaseDAO {
 			return jobs;
 		}
 		
-		/**
-		 * 
-		 * @param id of the headhunter (user)
-		 * @return
-		 */
-		public List<Job> getByHeadhunter(double id) {
-			ArrayList<Job> jobs = new ArrayList<>();
-			ResultSet rs = executeRequest("SELECT * FROM " + TABLE
-					+ " WHERE " + HEADHUNTER + " = " + id);
-
-			try {
-				while (rs.next()) {
-					jobs.add((Job)parseToObject(rs));
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			return jobs;
-		}
 
 		/**
 		 * Return all skills associated to a given job
