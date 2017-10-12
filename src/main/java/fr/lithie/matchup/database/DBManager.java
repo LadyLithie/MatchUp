@@ -30,7 +30,7 @@ public class DBManager {
 		}else {
 //			createDB(CONFIG,"matchup.sql");
 			createDB(CONFIG,"structure.sql");
-//			createDB(CONFIG, "ScriptData.sql");
+			createDB(CONFIG, "testdatas.sql");
 		}
 	}
 

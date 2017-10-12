@@ -20,7 +20,7 @@ CREATE TABLE user(
         id               BigInt Auto_increment  NOT NULL ,
         login            Varchar (30) NOT NULL ,
         password         Varchar (25) NOT NULL ,
-        role             enum('ADMIN','candidate','company'),
+        role             enum('ADMIN','CANDIDATE','COMPANY'),
         valid            enum('TRUE','FALSE') NOT NULL DEFAULT 'FALSE',
         created_at       Datetime ,
         updated_at       Datetime ,
