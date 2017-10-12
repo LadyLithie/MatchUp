@@ -28,8 +28,8 @@ public class DBManager {
 		if (canConnect()) {
 			connect();
 		}else {
-			createDB(CONFIG,"matchup.sql");
-//			createDB(CONFIG,"structDB.sql");
+//			createDB(CONFIG,"matchup.sql");
+			createDB(CONFIG,"structure.sql");
 //			createDB(CONFIG, "ScriptData.sql");
 		}
 	}

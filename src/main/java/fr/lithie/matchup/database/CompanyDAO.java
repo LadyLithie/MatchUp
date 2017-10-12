@@ -17,7 +17,7 @@ import fr.lithie.matchup.entities.Role;
 import fr.lithie.matchup.entities.Validity;
 import fr.lithie.matchup.entities.base.BaseEntity;
 
-public class CompanyDAO extends RegisteredUserDAO {
+public class CompanyDAO extends UserDAO {
 
 	public static final String TABLE = "enterprise";
 	public static final String ID = "id_enterprise";

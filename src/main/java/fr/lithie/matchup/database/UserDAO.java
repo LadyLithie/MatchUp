@@ -11,13 +11,13 @@ import fr.lithie.matchup.entities.Headhunter;
 import fr.lithie.matchup.entities.User;
 import fr.lithie.matchup.entities.base.BaseEntity;
 
-public class RegisteredUserDAO extends BaseDAO {
+public class UserDAO extends BaseDAO {
 
-	public RegisteredUserDAO() {
+	public UserDAO() {
 		super("NA", "NA");
 	}
 
-	public RegisteredUserDAO(String table, String id) {
+	public UserDAO(String table, String id) {
 		super(table, id);
 	}
 

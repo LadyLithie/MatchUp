@@ -11,7 +11,7 @@ import fr.lithie.matchup.entities.Role;
 import fr.lithie.matchup.entities.Validity;
 import fr.lithie.matchup.entities.base.BaseEntity;
 
-public class HeadhunterDAO extends RegisteredUserDAO {
+public class HeadhunterDAO extends UserDAO {
 	
 	public static final String TABLE = "headhunter";
 	public static final String ID = "id_headhunter";
