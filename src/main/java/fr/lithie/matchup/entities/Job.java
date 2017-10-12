@@ -15,14 +15,14 @@ import java.util.List;
 
 import fr.lithie.matchup.entities.base.BaseEntity;
 
-public class Proposal extends BaseEntity {
+public class Job extends BaseEntity {
 	private String name;
 	private String presentation;
 	private String createdAt;
 	private String updatedAt;
 	private ContractType contractType;  
 	private Location localization;
-	private Enterprise company;
+	private Company company;
 	private Headhunter headhunter;
 	private List<Skill> skills;
 	
@@ -127,13 +127,13 @@ public class Proposal extends BaseEntity {
 	/**
 	 * @return the company
 	 */
-	public Enterprise getCompany() {
+	public Company getCompany() {
 		return company;
 	}
 	/**
 	 * @param company the company to set
 	 */
-	public void setCompany(Enterprise company) {
+	public void setCompany(Company company) {
 		this.company = company;
 	}
 	/**
@@ -166,14 +166,14 @@ public class Proposal extends BaseEntity {
 	 * @param name
 	 * @param contractType
 	 */
-	public Proposal (String name, ContractType contractType) {
+	public Job (String name, ContractType contractType) {
 		super();
 		this.name = name;
 		this.contractType = contractType;
 		skills = new ArrayList<>();
 	}
 	
-	public Proposal() {
+	public Job() {
 		super();
 		skills = new ArrayList<>();
 	}
@@ -182,7 +182,7 @@ public class Proposal extends BaseEntity {
 	 */
 	@Override
 	public String toString() {
-		return "Proposal [name=" + name + ", presentation=" + presentation + ", createdAt=" + createdAt + ", updatedAt="
+		return "Job [name=" + name + ", presentation=" + presentation + ", createdAt=" + createdAt + ", updatedAt="
 				+ updatedAt + ", contractType=" + contractType + ", localization=" + localization + ", company="
 				+ company + ", headhunter=" + headhunter + ", skills=" + skills + "]";
 

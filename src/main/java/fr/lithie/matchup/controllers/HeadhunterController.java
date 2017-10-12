@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 import fr.lithie.matchup.database.HeadhunterDAO;
 import fr.lithie.matchup.entities.Headhunter;
-import fr.lithie.matchup.entities.Proposal;
+import fr.lithie.matchup.entities.Job;
 import fr.lithie.matchup.entities.base.BaseEntity;
 import fr.lithie.matchup.managers.ViewsManager;
 import fr.lithie.matchup.views.headhunter.HeadhunterView;
@@ -27,11 +27,11 @@ import fr.lithie.matchup.views.panels.PanelResumeJob;
 public class HeadhunterController extends BaseController {
 
 	private Headhunter user;
-//	private Proposal job;
+//	private Job job;
 	private PanelListJobs panel_JobList;
 	private PanelHeadhunterPresentation panel_HeadhunterPresentation;
 	private PanelLinkedEnterprises panel_LinkedEnterprises;
-	private ArrayList<Proposal> jobs;
+	private ArrayList<Job> jobs;
 	private ArrayList<PanelResumeJob> pJobs = new ArrayList<>();
 	
 	
@@ -70,7 +70,7 @@ public class HeadhunterController extends BaseController {
 			
 			pJobs = new ArrayList<>();
 			
-			for (Proposal job : user.getJobs()) {
+			for (Job job : user.getJobs()) {
 				
 				PanelResumeJob unJob = new PanelResumeJob(job);
 				
@@ -92,7 +92,7 @@ public class HeadhunterController extends BaseController {
 //		List<BaseEntity> associates = new List<BaseEntity> get();
 //		if (user.getAssociates() != null) {
 //			
-//			for (Enterprise enterprise : associates) {
+//			for (Company enterprise : associates) {
 //				
 //				PanelEnterpriseAssociated uneEntreprise = new PanelEnterpriseAssociated(enterprise);
 //				uneEntreprise.getLblEnterpriseName().setText(enterprise.getName());

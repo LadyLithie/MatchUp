@@ -15,10 +15,10 @@ import javax.swing.ListModel;
 
 import fr.lithie.matchup.database.CandidateDAO;
 import fr.lithie.matchup.entities.Candidate;
-import fr.lithie.matchup.entities.Enterprise;
+import fr.lithie.matchup.entities.Company;
 import fr.lithie.matchup.entities.Headhunter;
-import fr.lithie.matchup.entities.Proposal;
-import fr.lithie.matchup.entities.RegisteredUser;
+import fr.lithie.matchup.entities.Job;
+import fr.lithie.matchup.entities.User;
 import fr.lithie.matchup.entities.Skill;
 import fr.lithie.matchup.entities.base.BaseEntity;
 import fr.lithie.matchup.managers.MatchManager;
@@ -34,7 +34,7 @@ import fr.lithie.matchup.views.panels.PanelMatchResume;
  *
  */
 public class ProMatchingHomeController extends BaseController {
-	private RegisteredUser user;
+	private User user;
 	private List<PanelJobToMatch> panelJobToMatchs;
 	private List<BaseEntity> candidates;
 	private MatchedCandidate detail;
@@ -58,24 +58,24 @@ public class ProMatchingHomeController extends BaseController {
 	@Override
 	public void initView() {
 		ProMatchingHomeView view = (ProMatchingHomeView) getView();
-		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
+		user = (User) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		setButtonsVisible(enMatching);
 
 		view.getMenuBar().getLblUserName().setText(user.getName());
 
-		if (((user instanceof Enterprise) && !((Enterprise) user).getJobs().isEmpty())
+		if (((user instanceof Company) && !((Company) user).getJobs().isEmpty())
 				|| ((user instanceof Headhunter) && !((Headhunter) user).getJobs().isEmpty())) {
 			// local list to avoid complication/doubleness
-			List<Proposal> list;
-			if (user instanceof Enterprise) {
-				list = ((Enterprise) user).getJobs();
+			List<Job> list;
+			if (user instanceof Company) {
+				list = ((Company) user).getJobs();
 			} else {
 				list = ((Headhunter) user).getJobs();
 			}
 			// Create the jobs panel and add them to both the view and the listing for use
 			// in initevent()
 			panelJobToMatchs = new ArrayList<>();
-			for (Proposal job : list) {
+			for (Job job : list) {
 				PanelJobToMatch pJob = new PanelJobToMatch(job);
 				GridBagConstraints gbc_pJob = new GridBagConstraints();
 				gbc_pJob.anchor = GridBagConstraints.NORTHWEST;
@@ -106,7 +106,7 @@ public class ProMatchingHomeController extends BaseController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (user instanceof Enterprise) {
+				if (user instanceof Company) {
 					ViewsManager.getInstance().next(new CompanyController(frame));
 				} else {
 					ViewsManager.getInstance().next(new HeadhunterController(frame));

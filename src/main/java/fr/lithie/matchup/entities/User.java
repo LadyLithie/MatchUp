@@ -11,7 +11,7 @@ import fr.lithie.matchup.entities.base.BaseEntity;
  * @author Audrey
  *
  */
-public abstract class RegisteredUser extends BaseEntity {
+public abstract class User extends BaseEntity {
 	private String login;
 	private String name;
 	private Role role;
@@ -167,7 +167,7 @@ public abstract class RegisteredUser extends BaseEntity {
 	/**
 	 * Void constructor
 	 */
-	public RegisteredUser() {
+	public User() {
 		super();
 	}
 
@@ -182,7 +182,7 @@ public abstract class RegisteredUser extends BaseEntity {
 	 * @param created_at
 	 * @param updated_at
 	 */
-	public RegisteredUser(String login, String name, String phone, String email,
+	public User(String login, String name, String phone, String email,
 			String presentation, Blob avatar, String created_at, String updated_at) {
 		super();
 		this.login = login;
@@ -196,7 +196,7 @@ public abstract class RegisteredUser extends BaseEntity {
 	}
 	
 	
-	public RegisteredUser(Role role){
+	public User(Role role){
 		this.role = role;
 	}
 
@@ -206,7 +206,7 @@ public abstract class RegisteredUser extends BaseEntity {
 	 */
 	@Override
 	public String toString() {
-		return "RegisteredUser [login=" + login + ", name=" + name + ", phone=" + phone + ", email=" + email
+		return "User [login=" + login + ", name=" + name + ", phone=" + phone + ", email=" + email
 				+ ", presentation=" + presentation + ", avatar=" + avatar + ", created_at=" + created_at
 				+ ", updated_at=" + updated_at + ", password=" + password + "]";
 	}

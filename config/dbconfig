@@ -1,5 +1,5 @@
 serverAddress="localhost"
 port="3306"
-dbName="matchup"
+dbName="matchupTest"
 login="root"
 password=

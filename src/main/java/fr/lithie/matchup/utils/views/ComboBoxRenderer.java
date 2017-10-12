@@ -7,7 +7,7 @@ import javax.swing.JList;
 
 import fr.lithie.matchup.entities.ContractType;
 import fr.lithie.matchup.entities.Location;
-import fr.lithie.matchup.entities.RegisteredUser;
+import fr.lithie.matchup.entities.User;
 
 /**
  * @author Audrey
@@ -24,8 +24,8 @@ public class ComboBoxRenderer extends DefaultListCellRenderer {
 		}else if (value instanceof Location) {
 			Location item = (Location) value;
 			setText(item.getZipcode() + " " + item.getCity());
-		}else if (value instanceof RegisteredUser) {
-			RegisteredUser item = (RegisteredUser) value;
+		}else if (value instanceof User) {
+			User item = (User) value;
 			setText(item.getName());
 		}
 		return this;

@@ -12,15 +12,11 @@ import java.util.List;
  * @author Audrey
  *
  */
-public class Candidate extends RegisteredUser {
+public class Candidate extends User {
 
 	private String firstname;
 	private String lastname;
-	private String birstdate;
 	private String address;
-
-	private ArrayList<Diploma> qualifications;
-	private ArrayList<String> mobility;
 
 	private List<Skill> skills = new ArrayList<Skill>();
 
@@ -52,51 +48,6 @@ public class Candidate extends RegisteredUser {
 	 */
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
-	}
-
-	/**
-	 * @return the birstdate
-	 */
-	public String getBirstdate() {
-		return birstdate;
-	}
-
-	/**
-	 * @param string
-	 *            the birstdate to set
-	 */
-	public void setBirstdate(String string) {
-		this.birstdate = string;
-	}
-
-	/**
-	 * @return the qualifications
-	 */
-	public ArrayList<Diploma> getQualifications() {
-		return qualifications;
-	}
-
-	/**
-	 * @param qualifications
-	 *            the qualifications to set
-	 */
-	public void setQualifications(ArrayList<Diploma> qualifications) {
-		this.qualifications = qualifications;
-	}
-
-	/**
-	 * @return the mobility
-	 */
-	public ArrayList<String> getMobility() {
-		return mobility;
-	}
-
-	/**
-	 * @param mobility
-	 *            the mobility to set
-	 */
-	public void setMobility(ArrayList<String> mobility) {
-		this.mobility = mobility;
 	}
 
 	/**
@@ -147,15 +98,11 @@ public class Candidate extends RegisteredUser {
 	 * @param skills
 	 */
 	public Candidate(String login, String name, String phone, String email, String presentation, Blob avatar,
-			String created_at, String updated_at, String firstname, String lastname, String birstdate, String address,
-			ArrayList<Diploma> qualifications, ArrayList<String> mobility, List<Skill> skills) {
+			String created_at, String updated_at, String firstname, String lastname, String address, List<Skill> skills) {
 		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.birstdate = birstdate;
 		this.address = address;
-		this.qualifications = qualifications;
-		this.mobility = mobility;
 		this.skills = skills;
 		
 		super.setRole(Role.CANDIDATE);
@@ -169,10 +116,7 @@ public class Candidate extends RegisteredUser {
 	public String toString() {
 		return "Candidate [" + (firstname != null ? "firstname=" + firstname + ", " : "")
 				+ (lastname != null ? "lastname=" + lastname + ", " : "")
-				+ (birstdate != null ? "birstdate=" + birstdate + ", " : "")
 				+ (address != null ? "address=" + address + ", " : "")
-				+ (qualifications != null ? "qualifications=" + qualifications + ", " : "")
-				+ (mobility != null ? "mobility=" + mobility + ", " : "")
 				+ (skills != null ? "skills=" + skills + ", " : "")
 				+ (super.toString() != null ? "toString()=" + super.toString() : "") + "]";
 	}

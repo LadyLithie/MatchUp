@@ -11,20 +11,20 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import fr.lithie.matchup.entities.Proposal;
+import fr.lithie.matchup.entities.Job;
 
 public class PanelHeadhunterJob extends JPanel {
 
 	private JTextArea textArea_JobTitle;
 	private JTextField textField_EnterpriseName;
 	private JButton btnEditJob;
-	private Proposal job;
+	private Job job;
 	
 	
 	/**
 	 * @return the job
 	 */
-	public Proposal getJob() {
+	public Job getJob() {
 		return job;
 	}
 
@@ -53,7 +53,7 @@ public class PanelHeadhunterJob extends JPanel {
 	}
 
 
-	public PanelHeadhunterJob (Proposal job) {
+	public PanelHeadhunterJob (Job job) {
 		super();
 		this.job = job;
 		
@@ -83,7 +83,7 @@ public class PanelHeadhunterJob extends JPanel {
 		gbc_textArea_JobTitle.gridy = 1;
 		add(textArea_JobTitle, gbc_textArea_JobTitle);
 		
-		JLabel lblEnterprise = new JLabel("Enterprise");
+		JLabel lblEnterprise = new JLabel("Company");
 		GridBagConstraints gbc_lblEnterprise = new GridBagConstraints();
 		gbc_lblEnterprise.insets = new Insets(0, 0, 5, 0);
 		gbc_lblEnterprise.gridx = 0;

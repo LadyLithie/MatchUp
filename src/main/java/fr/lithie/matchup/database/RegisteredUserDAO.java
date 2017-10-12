@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import fr.lithie.matchup.database.base.BaseDAO;
 import fr.lithie.matchup.entities.Administrator;
 import fr.lithie.matchup.entities.Candidate;
-import fr.lithie.matchup.entities.Enterprise;
+import fr.lithie.matchup.entities.Company;
 import fr.lithie.matchup.entities.Headhunter;
-import fr.lithie.matchup.entities.RegisteredUser;
+import fr.lithie.matchup.entities.User;
 import fr.lithie.matchup.entities.base.BaseEntity;
 
 public class RegisteredUserDAO extends BaseDAO {
@@ -39,16 +39,16 @@ public class RegisteredUserDAO extends BaseDAO {
 		return null;
 	}
 	
-	public RegisteredUser connection(String login, String password) {
-		RegisteredUser user = null;
+	public User connection(String login, String password) {
+		User user = null;
 		//Test dans la table Entreprise
 		ResultSet rs = executeRequest("SELECT * FROM " + EnterpriseDAO.TABLE + " WHERE " + EnterpriseDAO.LOGIN +" = '" + login + "' AND " + EnterpriseDAO.PASSWORD + " = '" + password + "'");
 		try {
 			if (rs.next()) {
-				user = new Enterprise();
+				user = new Company();
 				user.setId(rs.getDouble(EnterpriseDAO.ID));
 				EnterpriseDAO enterpriseDAO = new EnterpriseDAO();
-				user = (Enterprise) enterpriseDAO.get(user.getId());
+				user = (Company) enterpriseDAO.get(user.getId());
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

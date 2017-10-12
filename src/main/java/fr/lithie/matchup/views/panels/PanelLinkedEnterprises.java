@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
-import fr.lithie.matchup.entities.Enterprise;
+import fr.lithie.matchup.entities.Company;
 
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -17,8 +17,8 @@ import java.awt.Color;
 
 public class PanelLinkedEnterprises extends JPanel {
 
-	private ArrayList<Enterprise> enterprises;
-	private Enterprise company;
+	private ArrayList<Company> companies;
+	private Company company;
 	
 	private PanelNewEnterprise newEnterprise;
 	private JScrollPane scrollPaneListEnterprise;
@@ -44,8 +44,8 @@ public class PanelLinkedEnterprises extends JPanel {
 	/**
 	 * @return the companies
 	 */
-	public ArrayList<Enterprise> getCompanies() {
-		return enterprises;
+	public ArrayList<Company> getCompanies() {
+		return companies;
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class PanelLinkedEnterprises extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelLinkedEnterprises(ArrayList<Enterprise> companies) {
+	public PanelLinkedEnterprises(ArrayList<Company> companies) {
 		setBackground(Color.WHITE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{300};

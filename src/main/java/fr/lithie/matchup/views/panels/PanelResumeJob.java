@@ -11,7 +11,7 @@ import java.awt.Insets;
 import javax.swing.JTextPane;
 import javax.swing.border.LineBorder;
 
-import fr.lithie.matchup.entities.Proposal;
+import fr.lithie.matchup.entities.Job;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -25,7 +25,7 @@ public class PanelResumeJob extends JPanel {
 	
 	private JTextField textField;
 	private JLabel lblLink;
-	private Proposal job;
+	private Job job;
 	private JButton btnEditer;
 
 	/**
@@ -45,7 +45,7 @@ public class PanelResumeJob extends JPanel {
 	/**
 	 * @return the job
 	 */
-	public Proposal getJob() {
+	public Job getJob() {
 		return job;
 	}
 
@@ -59,7 +59,7 @@ public class PanelResumeJob extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelResumeJob(Proposal job) {
+	public PanelResumeJob(Job job) {
 		super();
 		this.job = job;
 

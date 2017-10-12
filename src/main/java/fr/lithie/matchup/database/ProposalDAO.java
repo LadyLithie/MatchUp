@@ -10,8 +10,8 @@ import java.util.List;
 
 import fr.lithie.matchup.database.base.BaseDAO;
 import fr.lithie.matchup.entities.ContractType;
-import fr.lithie.matchup.entities.Enterprise;
-import fr.lithie.matchup.entities.Proposal;
+import fr.lithie.matchup.entities.Company;
+import fr.lithie.matchup.entities.Job;
 import fr.lithie.matchup.entities.Skill;
 import fr.lithie.matchup.entities.base.BaseEntity;
 
@@ -43,7 +43,7 @@ public class ProposalDAO extends BaseDAO {
 		 */
 		@Override
 		public BaseEntity parseToObject(ResultSet resultSet) {
-			Proposal job = new Proposal();
+			Job job = new Job();
 			
 			try {
 				job.setId(resultSet.getDouble(ID));
@@ -51,7 +51,7 @@ public class ProposalDAO extends BaseDAO {
 				job.setPresentation(resultSet.getString(PRESENTATION));
 				job.setLocalization(resultSet.getString(ADDRESS));
 				EnterpriseDAO enterprise = new EnterpriseDAO();
-				job.setCompany((Enterprise) enterprise.get(resultSet.getDouble(ENTERPRISE)));
+				job.setCompany((Company) enterprise.get(resultSet.getDouble(ENTERPRISE)));
 				ContractDAO cDao = new ContractDAO();
 				job.setContractType((ContractType) cDao.get(resultSet.getDouble(CONTRACT)));
 				//missing DAOheadhunter
@@ -69,7 +69,7 @@ public class ProposalDAO extends BaseDAO {
 		public String parseToString(BaseEntity item) {
 			String request;
 			
-			Proposal job = ((Proposal)item);
+			Job job = ((Job)item);
 			request = String.valueOf(job.getId());
 			request += ",'"+job.getName()+"'";
 			request += ","+(job.getLocalization() == null ? "null" : "'"+job.getLocalization()+"'");	
@@ -110,7 +110,7 @@ public class ProposalDAO extends BaseDAO {
 		public String parseUpdateToString(BaseEntity item) {
 			String request;
 			
-			Proposal job = ((Proposal)item);
+			Job job = ((Job)item);
 			request = NAME +" = '"+job.getName()+"',";
 			if(job.getLocalization() == null) {
 				request += ADDRESS +" = null,";
@@ -147,14 +147,14 @@ public class ProposalDAO extends BaseDAO {
 		 * @param id of the compagny (user)
 		 * @return
 		 */
-		public ArrayList<Proposal> getByCompany(double id) {
-			ArrayList<Proposal> jobs = new ArrayList<>();
+		public ArrayList<Job> getByCompany(double id) {
+			ArrayList<Job> jobs = new ArrayList<>();
 			ResultSet rs = executeRequest("SELECT * FROM " + TABLE
 					+ " WHERE " + ENTERPRISE + " = " + id);
 
 			try {
 				while (rs.next()) {
-					Proposal nJob = (Proposal) parseToObject(rs);
+					Job nJob = (Job) parseToObject(rs);
 					nJob = getSkills(nJob);
 					jobs.add(nJob);
 				}
@@ -170,14 +170,14 @@ public class ProposalDAO extends BaseDAO {
 		 * @param id of the headhunter (user)
 		 * @return
 		 */
-		public List<Proposal> getByHeadhunter(double id) {
-			ArrayList<Proposal> jobs = new ArrayList<>();
+		public List<Job> getByHeadhunter(double id) {
+			ArrayList<Job> jobs = new ArrayList<>();
 			ResultSet rs = executeRequest("SELECT * FROM " + TABLE
 					+ " WHERE " + HEADHUNTER + " = " + id);
 
 			try {
 				while (rs.next()) {
-					jobs.add((Proposal)parseToObject(rs));
+					jobs.add((Job)parseToObject(rs));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -192,7 +192,7 @@ public class ProposalDAO extends BaseDAO {
 		 * @param job
 		 * @return
 		 */
-		public Proposal getSkills(Proposal job) {
+		public Job getSkills(Job job) {
 			ResultSet rs = executeRequest("SELECT * FROM " + JOB_SKILL
 					+ " WHERE " + ID_JOB + " = " + job.getId());
 			List<Double> skillsId = new ArrayList<Double>();
@@ -220,7 +220,7 @@ public class ProposalDAO extends BaseDAO {
 		 * @param job
 		 * @return
 		 */
-		public int insertSkills(Proposal job) {
+		public int insertSkills(Job job) {
 			int result = 0;
 			deleteSkills(job);
 			for (Skill skill : job.getSkills()) {
@@ -237,7 +237,7 @@ public class ProposalDAO extends BaseDAO {
 		 * @param job
 		 * @return
 		 */
-		public int deleteSkills(Proposal job) {
+		public int deleteSkills(Job job) {
 			return executeRequestUpdate("DELETE FROM " + JOB_SKILL + " WHERE "
 					+ ID_JOB + " = " + job.getId());
 		}

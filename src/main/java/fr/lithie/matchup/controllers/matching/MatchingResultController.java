@@ -5,22 +5,22 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import fr.lithie.matchup.controllers.BaseController;
-import fr.lithie.matchup.entities.Enterprise;
+import fr.lithie.matchup.entities.Company;
 import fr.lithie.matchup.entities.Headhunter;
-import fr.lithie.matchup.entities.Proposal;
-import fr.lithie.matchup.entities.RegisteredUser;
+import fr.lithie.matchup.entities.Job;
+import fr.lithie.matchup.entities.User;
 
 public class MatchingResultController extends BaseController {
 
-	public MatchingResultController(JFrame frame, Enterprise enterprise2) {
+	public MatchingResultController(JFrame frame, Company enterprise2) {
 		super();
 	}
 	public MatchingResultController(JFrame frame, Headhunter headhunter2) {
 		super();
 	}
-	private RegisteredUser user;
-	private Enterprise enterprise;
+	private User user;
+	private Company company;
 	private Headhunter headhunter;
-	private ArrayList<Proposal> proposals = new ArrayList<>();
+	private ArrayList<Job> jobs = new ArrayList<>();
 	
 }

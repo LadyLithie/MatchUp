@@ -35,9 +35,9 @@ import fr.lithie.matchup.database.SkillDAO;
 import fr.lithie.matchup.database.base.BaseDAO;
 import fr.lithie.matchup.entities.Administrator;
 import fr.lithie.matchup.entities.Candidate;
-import fr.lithie.matchup.entities.Enterprise;
+import fr.lithie.matchup.entities.Company;
 import fr.lithie.matchup.entities.Headhunter;
-import fr.lithie.matchup.entities.RegisteredUser;
+import fr.lithie.matchup.entities.User;
 import fr.lithie.matchup.entities.Skill;
 import fr.lithie.matchup.entities.Validity;
 import fr.lithie.matchup.entities.base.BaseEntity;
@@ -52,7 +52,7 @@ import fr.lithie.matchup.views.panels.PanelAdminUser;
  */
 public class AdminController extends BaseController {
 	private Administrator user;
-//	private List<RegisteredUser> users;
+//	private List<User> users;
 
 	private MouseListener mouseChangeAvatar;
 	protected AdministratorView v;
@@ -125,9 +125,9 @@ public class AdminController extends BaseController {
 		for (BaseEntity entity : list) {
 			if (entity.getId() != user.getId()) {
 				PanelAdminUser user = new PanelAdminUser();
-				user.setUser((RegisteredUser) entity);
-				user.getLblName().setText(((RegisteredUser) entity).getName());
-				user.getLblEmail().setText(((RegisteredUser) entity).getEmail());
+				user.setUser((User) entity);
+				user.getLblName().setText(((User) entity).getName());
+				user.getLblEmail().setText(((User) entity).getEmail());
 				user.getLblType().setText(entity.getClass().getSimpleName());
 				GridBagConstraints gbc_user = new GridBagConstraints();
 				gbc_user.fill = GridBagConstraints.HORIZONTAL;
@@ -136,7 +136,7 @@ public class AdminController extends BaseController {
 				gbc_user.insets = new Insets(5, 5, 5, 5);
 				view.getPanelListUsers().add(user, gbc_user);
 				view.getUsers().add(user);
-//				users.add((RegisteredUser) entity);
+//				users.add((User) entity);
 			}
 		}
 	}
@@ -247,7 +247,7 @@ public class AdminController extends BaseController {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						RegisteredUser user = userManager.getUser();
+						User user = userManager.getUser();
 						int res = JOptionPane.showConfirmDialog(null,
 								"Souhaitez-vous definitivement valider " + user.getName(), "Validation",
 								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -255,7 +255,7 @@ public class AdminController extends BaseController {
 							user.setValid(Validity.TRUE);
 							// DAO with instance :(
 							BaseDAO dao;
-							if (user instanceof Enterprise) {
+							if (user instanceof Company) {
 								dao = new EnterpriseDAO();
 								dao.update(user);
 							} else if (user instanceof Headhunter) {
@@ -295,7 +295,7 @@ public class AdminController extends BaseController {
 				public void actionPerformed(ActionEvent e) {
 					// Popup with random password of 6 character
 					// set this new password for the user
-					RegisteredUser user = userManager.getUser();
+					User user = userManager.getUser();
 					int res = JOptionPane.showConfirmDialog(null,
 							"Confirmez le reset du mot de passe de " + user.getName(), "Validation",
 							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -309,7 +309,7 @@ public class AdminController extends BaseController {
 					//			JOptionPane.INFORMATION_MESSAGE);
 						// DAO with instance :(
 						BaseDAO dao;
-						if (user instanceof Enterprise) {
+						if (user instanceof Company) {
 							dao = new EnterpriseDAO();
 							dao.update(user);
 						} else if (user instanceof Headhunter) {

@@ -2,7 +2,7 @@ package fr.lithie.matchup.controllers;
 
 import javax.swing.JFrame;
 
-import fr.lithie.matchup.entities.RegisteredUser;
+import fr.lithie.matchup.entities.User;
 import fr.lithie.matchup.views.ItemDetailsView;
 
 public class ItemDetailsController extends BaseController {
@@ -25,7 +25,7 @@ public class ItemDetailsController extends BaseController {
 				.getMenuBar()
 				.getLblUserName()
 				.setText(
-						((RegisteredUser) this.viewDatas.get(ViewsDatasTerms.CURRENT_USER))
+						((User) this.viewDatas.get(ViewsDatasTerms.CURRENT_USER))
 								.getName());
 		
 	}

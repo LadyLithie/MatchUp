@@ -3,7 +3,7 @@ package fr.lithie.matchup.views.panels;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fr.lithie.matchup.entities.Enterprise;
+import fr.lithie.matchup.entities.Company;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -24,7 +24,7 @@ public class PanelEnterpriseAssociated extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelEnterpriseAssociated(Enterprise enterprise) {
+	public PanelEnterpriseAssociated(Company company) {
 		
 		setBackground(Color.WHITE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -34,7 +34,7 @@ public class PanelEnterpriseAssociated extends JPanel {
 		gridBagLayout.rowWeights = new double[]{1.0};
 		setLayout(gridBagLayout);
 		
-		lblEnterpriseName = new JLabel(enterprise.getName());
+		lblEnterpriseName = new JLabel(company.getName());
 		GridBagConstraints gbc_lblEnterpriseName = new GridBagConstraints();
 		gbc_lblEnterpriseName.insets = new Insets(5, 5, 5, 5);
 		gbc_lblEnterpriseName.gridx = 0;

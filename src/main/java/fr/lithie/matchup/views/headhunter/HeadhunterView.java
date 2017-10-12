@@ -22,7 +22,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import fr.lithie.matchup.controllers.ProfessionalMatchingController;
-import fr.lithie.matchup.entities.Enterprise;
+import fr.lithie.matchup.entities.Company;
 import fr.lithie.matchup.managers.ViewsManager;
 import fr.lithie.matchup.views.base.BaseView;
 import fr.lithie.matchup.views.panels.PanelHeadhunterPresentation;
@@ -69,12 +69,12 @@ public class HeadhunterView extends BaseView {
 	/**
 	 * @return the companies
 	 */
-	public ArrayList<Enterprise> getCompanies() {
+	public ArrayList<Company> getCompanies() {
 		return companies;
 	}
 
 
-	private ArrayList<Enterprise> companies;
+	private ArrayList<Company> companies;
 	private JMenuItem mntmProfil;
 	private JMenuItem mntmMatching;
 

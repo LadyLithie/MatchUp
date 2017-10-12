@@ -22,11 +22,11 @@ import fr.lithie.matchup.database.LocationDAO;
 import fr.lithie.matchup.database.ProposalDAO;
 import fr.lithie.matchup.database.SkillDAO;
 import fr.lithie.matchup.entities.ContractType;
-import fr.lithie.matchup.entities.Enterprise;
+import fr.lithie.matchup.entities.Company;
 import fr.lithie.matchup.entities.Headhunter;
 import fr.lithie.matchup.entities.Location;
-import fr.lithie.matchup.entities.Proposal;
-import fr.lithie.matchup.entities.RegisteredUser;
+import fr.lithie.matchup.entities.Job;
+import fr.lithie.matchup.entities.User;
 import fr.lithie.matchup.entities.Skill;
 import fr.lithie.matchup.entities.base.BaseEntity;
 import fr.lithie.matchup.managers.ViewsManager;
@@ -39,9 +39,9 @@ import fr.lithie.matchup.views.ProposalView;
  */
 public class ProposalController extends BaseController {
 
-	private RegisteredUser user;
+	private User user;
 	private List<BaseEntity> skills;
-	private Proposal job;
+	private Job job;
 
 	/**
 	 * Creation constructor
@@ -54,7 +54,7 @@ public class ProposalController extends BaseController {
 		skills = sDao.get();
 		super.frame = frame;
 		super.view = new ProposalView(this.frame, skills);
-		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
+		user = (User) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		// DAO : skills = all registered skills
 
 	}
@@ -65,13 +65,13 @@ public class ProposalController extends BaseController {
 	 * @param frame
 	 * @param job
 	 */
-	public ProposalController(JFrame frame, Proposal job) {
+	public ProposalController(JFrame frame, Job job) {
 		super();
 		super.frame = frame;
 		SkillDAO sDao = new SkillDAO();
 		skills = sDao.get();
 		super.view = new ProposalView(this.frame, skills);
-		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
+		user = (User) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		this.job = job;
 
 	}
@@ -83,7 +83,7 @@ public class ProposalController extends BaseController {
 	 */
 	@Override
 	public void initView() {
-		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
+		user = (User) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		ProposalView vFrame = ((ProposalView) getView());
 		vFrame.getComboBox_contract().setRenderer(new ComboBoxRenderer());
 		vFrame.getComboBox_linkedUser().setRenderer(new ComboBoxRenderer());
@@ -103,12 +103,12 @@ public class ProposalController extends BaseController {
 				vFrame.getComboBox_location().addItem((Location) town);
 			}
 			// Link
-			if (user instanceof Enterprise) {
-				for (Headhunter hh : ((Enterprise) user).getAssociates()) {
+			if (user instanceof Company) {
+				for (Headhunter hh : ((Company) user).getAssociates()) {
 					vFrame.getComboBox_linkedUser().addItem(hh);
 				}
 			} else if (user instanceof Headhunter) {
-				for (Enterprise hh : ((Headhunter) user).getAssociates()) {
+				for (Company hh : ((Headhunter) user).getAssociates()) {
 					vFrame.getComboBox_linkedUser().addItem(hh);
 				}
 				vFrame.getLblLink().setText("Compagny");
@@ -135,13 +135,13 @@ public class ProposalController extends BaseController {
 			}
 
 			// case specific to user
-			if (user instanceof Enterprise) {
-				for (Headhunter hh : ((Enterprise) user).getAssociates()) {
+			if (user instanceof Company) {
+				for (Headhunter hh : ((Company) user).getAssociates()) {
 					vFrame.getComboBox_linkedUser().addItem(hh);
 				}
 				vFrame.getComboBox_linkedUser().setSelectedItem(job.getHeadhunter());
 			} else if (user instanceof Headhunter) {
-				for (Enterprise hh : ((Headhunter) user).getAssociates()) {
+				for (Company hh : ((Headhunter) user).getAssociates()) {
 					vFrame.getComboBox_linkedUser().addItem(hh);
 				}
 				vFrame.getLblLink().setText("Compagny");
@@ -157,7 +157,7 @@ public class ProposalController extends BaseController {
 				gbc_lblCompany.gridx = 0;
 				gbc_lblCompany.gridy = 3;
 				vFrame.getPanelCheckBox().add(lblCompany, gbc_lblCompany);
-				JComboBox<RegisteredUser> comboBox_company = new JComboBox<RegisteredUser>();
+				JComboBox<User> comboBox_company = new JComboBox<User>();
 				comboBox_company.addItem(job.getCompany());
 				comboBox_company.setSelectedItem(job.getCompany());
 				comboBox_company.setEnabled(false);
@@ -176,7 +176,7 @@ public class ProposalController extends BaseController {
 	public void initEvent() {
 		ProposalView v = (ProposalView) super.view;
 		// must test if job and user are linked
-		if (user instanceof Enterprise || user instanceof Headhunter) {
+		if (user instanceof Company || user instanceof Headhunter) {
 			/*
 			 * Mode Edit
 			 */
@@ -185,7 +185,7 @@ public class ProposalController extends BaseController {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Go previous page
-					if (user instanceof Enterprise) {
+					if (user instanceof Company) {
 						ViewsManager.getInstance().next(new CompanyController(frame));
 					} else {
 						ViewsManager.getInstance().next(new HeadhunterController(frame));
@@ -204,7 +204,7 @@ public class ProposalController extends BaseController {
 						//It's a creation
 						if (job == null) {
 							//Constructor with title and type of contract (by default CDD)
-							job = new Proposal(v.getTextField_JobTitle().getText(),
+							job = new Job(v.getTextField_JobTitle().getText(),
 									(ContractType) v.getComboBox_contract().getSelectedItem());
 							//Add the skills list
 							job.setSkills(new ArrayList<Skill>());
@@ -246,9 +246,9 @@ public class ProposalController extends BaseController {
 						//the user to the job for foreign key
 						//the linked user to the job for foreign key
 						//Return to user profile
-						if (user instanceof Enterprise) { //the current user is a company
+						if (user instanceof Company) { //the current user is a company
 							//Add the job to the user list
-							job.setCompany((Enterprise) user);
+							job.setCompany((Company) user);
 							job.setHeadhunter((Headhunter) v.getComboBox_linkedUser().getSelectedItem());
 							
 							if (exist) {
@@ -257,7 +257,7 @@ public class ProposalController extends BaseController {
 							} else {
 								pDao.insert(job);
 								pDao.insertSkills(job);
-								((Enterprise) user).getJobs().add(job);
+								((Company) user).getJobs().add(job);
 							}
 
 							System.out.println(job.toString());
@@ -265,7 +265,7 @@ public class ProposalController extends BaseController {
 
 						} else {//the current user is a headhunter
 							job.setHeadhunter((Headhunter) user);
-							job.setCompany((Enterprise) v.getComboBox_linkedUser().getSelectedItem());
+							job.setCompany((Company) v.getComboBox_linkedUser().getSelectedItem());
 							
 							if (exist) {
 								pDao.update(job);

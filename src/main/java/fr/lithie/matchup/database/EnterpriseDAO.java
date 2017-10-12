@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.lithie.matchup.entities.Enterprise;
+import fr.lithie.matchup.entities.Company;
 import fr.lithie.matchup.entities.Headhunter;
 import fr.lithie.matchup.entities.Role;
 import fr.lithie.matchup.entities.Validity;
@@ -48,7 +48,7 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 
 	@Override
 	public BaseEntity parseToObject(ResultSet resultSet) {
-		Enterprise e = new Enterprise();
+		Company e = new Company();
 
 		try {
 			e.setId(resultSet.getDouble(ID));
@@ -84,23 +84,23 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 	@Override
 	public String parseToString(BaseEntity item) {
 		String res = "null,";
-		Enterprise enterprise = (Enterprise) item;
+		Company company = (Company) item;
 		
-		res += "'"+enterprise.getName()+"',";
-		res += "'"+enterprise.getPhone()+"',";
-		res += "'"+enterprise.getAddress()+"',";
-		res += "'"+enterprise.getCity()+"',";
-		res += "'"+enterprise.getWebsite()+"',";
-		res += "'"+enterprise.getEmail()+"',";
-		res += "'"+enterprise.getPresentation()+"',";
-		res += "'"+enterprise.getAvatar()+"',";
-		res += "'"+enterprise.getTwitter()+"',";
-		res += "'"+enterprise.getLinkedin()+"',";
-		res += "'"+enterprise.getActivity()+"',";
-		res += "'"+enterprise.getRole()+"',";
-		res += "'"+enterprise.getLogin()+"',";
- 		res += "'"+enterprise.getPassword()+"',";
-		res += (enterprise.getValid() == null ? "'FALSE'" : "'" + enterprise.getValid() + "'" );
+		res += "'"+company.getName()+"',";
+		res += "'"+company.getPhone()+"',";
+		res += "'"+company.getAddress()+"',";
+		res += "'"+company.getCity()+"',";
+		res += "'"+company.getWebsite()+"',";
+		res += "'"+company.getEmail()+"',";
+		res += "'"+company.getPresentation()+"',";
+		res += "'"+company.getAvatar()+"',";
+		res += "'"+company.getTwitter()+"',";
+		res += "'"+company.getLinkedin()+"',";
+		res += "'"+company.getActivity()+"',";
+		res += "'"+company.getRole()+"',";
+		res += "'"+company.getLogin()+"',";
+ 		res += "'"+company.getPassword()+"',";
+		res += (company.getValid() == null ? "'FALSE'" : "'" + company.getValid() + "'" );
 		
 		return res;
 	}
@@ -108,36 +108,36 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 	@Override
 	public String parseUpdateToString(BaseEntity item) {
 		String res = "";
-		Enterprise enterprise = (Enterprise) item;
+		Company company = (Company) item;
 		
-		res += NAME + " = '"+enterprise.getName()+"',";
-		res += PHONE + " = '"+enterprise.getPhone()+"',";
-		res += ADDRESS + " = '"+enterprise.getAddress()+"',";
-		res += CITY + " = '"+enterprise.getCity()+"',";
-		res += WEBSITE + " = '"+enterprise.getWebsite()+"',";
-		res += MAIL + " = '"+enterprise.getEmail()+"',";
-		res += PRESENTATION + " = '"+enterprise.getPresentation()+"',";
-		res += LOGO + " = '"+enterprise.getAvatar()+"',";
-		res += TWITTER + " = '"+enterprise.getTwitter()+"',";
-		res += LINKEDIN + " = '"+enterprise.getLinkedin()+"',";
-		res += ACTIVITY + " = '"+enterprise.getActivity()+"',";
-		res += ROLE + " = '"+enterprise.getRole()+"',";
-		res += LOGIN + " = '"+enterprise.getLogin()+"',";
-		res += PASSWORD + " = '"+enterprise.getPassword()+"',";
-		res += VALID + " = "+ (enterprise.getValid()!=null ? "'"+enterprise.getValid() + "'" : "'FALSE'");
+		res += NAME + " = '"+company.getName()+"',";
+		res += PHONE + " = '"+company.getPhone()+"',";
+		res += ADDRESS + " = '"+company.getAddress()+"',";
+		res += CITY + " = '"+company.getCity()+"',";
+		res += WEBSITE + " = '"+company.getWebsite()+"',";
+		res += MAIL + " = '"+company.getEmail()+"',";
+		res += PRESENTATION + " = '"+company.getPresentation()+"',";
+		res += LOGO + " = '"+company.getAvatar()+"',";
+		res += TWITTER + " = '"+company.getTwitter()+"',";
+		res += LINKEDIN + " = '"+company.getLinkedin()+"',";
+		res += ACTIVITY + " = '"+company.getActivity()+"',";
+		res += ROLE + " = '"+company.getRole()+"',";
+		res += LOGIN + " = '"+company.getLogin()+"',";
+		res += PASSWORD + " = '"+company.getPassword()+"',";
+		res += VALID + " = "+ (company.getValid()!=null ? "'"+company.getValid() + "'" : "'FALSE'");
 		
 		return res;
 	}
 
 	/**
 	 * Retrieve the headhunters working with the company and add them to the entity
-	 * @param enterprise
+	 * @param company
 	 * @return the modified enterprise entity
 	 */
-	public Enterprise getHeadhunters(Enterprise enterprise) {
+	public Company getHeadhunters(Company company) {
 		//Search all rows where ID_ENTERPRISE = enterprise ID
 		ResultSet rs = executeRequest(
-				"SELECT * FROM " + ENTERPRISE_HEADHUNTER + " WHERE " + ID_ENTERPRISE + " = " + enterprise.getId());
+				"SELECT * FROM " + ENTERPRISE_HEADHUNTER + " WHERE " + ID_ENTERPRISE + " = " + company.getId());
 		
 		List<Double> headhuntersId = new ArrayList<Double>();
 		//Create the list of ID_HEADHUNTER
@@ -153,23 +153,23 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 		HeadhunterDAO hDao = new HeadhunterDAO();
 
 		for (Double id : headhuntersId) {
-			enterprise.getAssociates().add((Headhunter) hDao.get(id));
+			company.getAssociates().add((Headhunter) hDao.get(id));
 		}
 
-		return enterprise;
+		return company;
 	}
 
 	/**
 	 * Add all the associates of enterprise to the DB
-	 * @param enterprise
+	 * @param company
 	 * @return int = 
 	 * 				number of inserted headhunters
 	 */
-	public int insertHeadhunter(Enterprise enterprise) {
+	public int insertHeadhunter(Company company) {
 		int result = 0;
-		deleteHeadhunter(enterprise);
-		for (Headhunter headhunter : enterprise.getAssociates()) {
-			result += executeRequestUpdate("INSERT INTO " + ENTERPRISE_HEADHUNTER + " VALUES(" + enterprise.getId()
+		deleteHeadhunter(company);
+		for (Headhunter headhunter : company.getAssociates()) {
+			result += executeRequestUpdate("INSERT INTO " + ENTERPRISE_HEADHUNTER + " VALUES(" + company.getId()
 					+ "," + headhunter.getId() + ")");
 		}
 		return result;
@@ -177,12 +177,12 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 
 	/**
 	 * Delete all the associates of enterprise
-	 * @param enterprise
+	 * @param company
 	 * @return
 	 */
-	public int deleteHeadhunter(Enterprise enterprise) {
+	public int deleteHeadhunter(Company company) {
 		return executeRequestUpdate(
-				"DELETE FROM " + ENTERPRISE_HEADHUNTER + " WHERE " + ID_ENTERPRISE + " = " + enterprise.getId());
+				"DELETE FROM " + ENTERPRISE_HEADHUNTER + " WHERE " + ID_ENTERPRISE + " = " + company.getId());
 	}
 
 }

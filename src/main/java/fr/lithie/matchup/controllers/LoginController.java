@@ -13,9 +13,9 @@ import fr.lithie.matchup.database.ProposalDAO;
 import fr.lithie.matchup.database.RegisteredUserDAO;
 import fr.lithie.matchup.entities.Administrator;
 import fr.lithie.matchup.entities.Candidate;
-import fr.lithie.matchup.entities.Enterprise;
+import fr.lithie.matchup.entities.Company;
 import fr.lithie.matchup.entities.Headhunter;
-import fr.lithie.matchup.entities.RegisteredUser;
+import fr.lithie.matchup.entities.User;
 import fr.lithie.matchup.managers.ViewsManager;
 import fr.lithie.matchup.views.LoginView;
 
@@ -24,7 +24,7 @@ import fr.lithie.matchup.views.LoginView;
  *
  */
 public class LoginController extends BaseController {
-	private RegisteredUser user;
+	private User user;
 
 	/**
 	 * Basic constructor
@@ -43,7 +43,7 @@ public class LoginController extends BaseController {
 	 * @param frame
 	 * @param newUser
 	 */
-	public LoginController(JFrame frame, RegisteredUser newUser) {
+	public LoginController(JFrame frame, User newUser) {
 		super();
 		this.user = newUser;
 		super.frame = frame;
@@ -58,9 +58,9 @@ public class LoginController extends BaseController {
 	@Override
 	public void initView() {
 		if (getViewDatas().get("newUser") != null) {
-			this.user = (RegisteredUser) getViewDatas().get("newUser");
+			this.user = (User) getViewDatas().get("newUser");
 		} else if (getViewDatas().get("currentUser") != null) {
-			this.user = (RegisteredUser) getViewDatas().get("currentUser");
+			this.user = (User) getViewDatas().get("currentUser");
 		}
 
 		if (user != null) {
@@ -104,8 +104,8 @@ public class LoginController extends BaseController {
 
 					if (user != null) {
 						setupDatas();
-						if (user instanceof Enterprise) {
-							((Enterprise) user).setJobs(new ProposalDAO().getByCompany(user.getId()));
+						if (user instanceof Company) {
+							((Company) user).setJobs(new ProposalDAO().getByCompany(user.getId()));
 							ViewsManager.getInstance().next(new CompanyController(frame));
 						}else if (user instanceof Headhunter) {
 							((Headhunter) user).setJobs(new ProposalDAO().getByHeadhunter(user.getId()));

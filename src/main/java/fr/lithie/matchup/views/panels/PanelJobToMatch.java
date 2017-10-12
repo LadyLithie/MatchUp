@@ -7,18 +7,18 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fr.lithie.matchup.entities.Proposal;
+import fr.lithie.matchup.entities.Job;
 
 import java.awt.BorderLayout;
 
 public class PanelJobToMatch extends JPanel {
-	private Proposal job;
+	private Job job;
 	private JButton btnSeeMore;
 
 	/**
 	 * @return the job
 	 */
-	public Proposal getJob() {
+	public Job getJob() {
 		return job;
 	}
 
@@ -32,7 +32,7 @@ public class PanelJobToMatch extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelJobToMatch(Proposal job) {
+	public PanelJobToMatch(Job job) {
 		this.job = job;
 		JPanel panelMatch = new JPanel();
 		GridBagConstraints gbc_panelMatch = new GridBagConstraints();

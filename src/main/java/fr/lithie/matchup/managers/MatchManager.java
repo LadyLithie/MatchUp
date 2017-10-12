@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.lithie.matchup.entities.Candidate;
-import fr.lithie.matchup.entities.Proposal;
+import fr.lithie.matchup.entities.Job;
 import fr.lithie.matchup.entities.base.BaseEntity;
 
 /**
@@ -16,7 +16,7 @@ import fr.lithie.matchup.entities.base.BaseEntity;
  */
 public class MatchManager {
 	private List<BaseEntity> cList;
-	private List<Proposal> jList;
+	private List<Job> jList;
 	private boolean modePro;
 
 	/**
@@ -32,7 +32,7 @@ public class MatchManager {
 	 * @param candidates
 	 * @param job
 	 */
-	public MatchManager(List<BaseEntity> candidates, Proposal job) {
+	public MatchManager(List<BaseEntity> candidates, Job job) {
 		this();
 		this.cList = candidates;
 		jList.add(job);
@@ -44,7 +44,7 @@ public class MatchManager {
 	 * @param candidate
 	 * @param jList
 	 */
-	public MatchManager(Candidate candidate, List<Proposal> jList) {
+	public MatchManager(Candidate candidate, List<Job> jList) {
 		this();
 		this.jList = jList;
 		cList.add(candidate);

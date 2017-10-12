@@ -25,9 +25,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import fr.lithie.matchup.database.EnterpriseDAO;
-import fr.lithie.matchup.entities.Enterprise;
+import fr.lithie.matchup.entities.Company;
 import fr.lithie.matchup.entities.Headhunter;
-import fr.lithie.matchup.entities.Proposal;
+import fr.lithie.matchup.entities.Job;
 import fr.lithie.matchup.managers.ViewsManager;
 import fr.lithie.matchup.utils.views.ActionModSocialLink;
 import fr.lithie.matchup.utils.views.ViewsUtils;
@@ -43,7 +43,7 @@ import fr.lithie.matchup.views.panels.PanelResumeJob;
  *
  */
 public class CompanyController extends BaseController {
-	private Enterprise user;
+	private Company user;
 	private ArrayList<Headhunter> headhunters = new ArrayList<>();
 	private ArrayList<PanelFieldsButton> pHeadhunters = new ArrayList<>();
 	private ArrayList<PanelResumeJob> pJobs = new ArrayList<>();
@@ -81,7 +81,7 @@ public class CompanyController extends BaseController {
 	public CompanyController(JFrame frame) {
 		super();
 		super.frame = frame;
-//		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
+//		user = (Company) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		super.view = new CompanyView(this.frame);
 	}
 
@@ -92,7 +92,7 @@ public class CompanyController extends BaseController {
 	 */
 	@Override
 	public void initView() {
-		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
+		user = (Company) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		CompanyView v = (CompanyView) getView();
 
 		// MenuBar
@@ -141,7 +141,7 @@ public class CompanyController extends BaseController {
 		PanelListJobs vListJobs = (PanelListJobs) v.getPanel_left();
 		if (user.getJobs() != null) {
 			pJobs = new ArrayList<>();
-			for (Proposal Ujob : user.getJobs()) {
+			for (Job Ujob : user.getJobs()) {
 				PanelResumeJob job = new PanelResumeJob(Ujob);
 				job.setPreferredSize(new Dimension(130, 170));
 				job.getLblLink().setText("Contact");

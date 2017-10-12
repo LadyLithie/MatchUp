@@ -19,7 +19,7 @@ import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 
 import fr.lithie.matchup.entities.ContractType;
 import fr.lithie.matchup.entities.Location;
-import fr.lithie.matchup.entities.RegisteredUser;
+import fr.lithie.matchup.entities.User;
 import fr.lithie.matchup.entities.Skill;
 import fr.lithie.matchup.entities.base.BaseEntity;
 import fr.lithie.matchup.views.base.BaseView;
@@ -36,7 +36,7 @@ public class ProposalView extends BaseView implements IVisibility {
 	private JButton btnCancel;
 	private JButton btnProposalCreation;
 	// Zone options
-	private JComboBox<RegisteredUser> comboBox_linkedUser;
+	private JComboBox<User> comboBox_linkedUser;
 	private JComboBox<ContractType> comboBox_contract;
 	private JComboBox<Location> comboBox_location;
 //	private JComboBox<City> comboBox_location;
@@ -73,7 +73,7 @@ public class ProposalView extends BaseView implements IVisibility {
 	/**
 	 * @return the comboBox_linkedUser
 	 */
-	public JComboBox<RegisteredUser> getComboBox_linkedUser() {
+	public JComboBox<User> getComboBox_linkedUser() {
 		return comboBox_linkedUser;
 	}
 
@@ -135,7 +135,7 @@ public class ProposalView extends BaseView implements IVisibility {
 	 */
 	public ProposalView(JFrame frame, List<BaseEntity> skills) {
 		super();
-		super.pageName = "Proposal";
+		super.pageName = "Job";
 		JPanel panel = new JPanel();
 		super.panel = panel;
 		GridBagLayout gbl_contentPane = new GridBagLayout();
@@ -291,7 +291,7 @@ public class ProposalView extends BaseView implements IVisibility {
 		gbc_lblLink.gridy = 2;
 		panelComboBox.add(lblLink, gbc_lblLink);
 
-		comboBox_linkedUser = new JComboBox<RegisteredUser>();
+		comboBox_linkedUser = new JComboBox<User>();
 		GridBagConstraints gbc_comboBox_linkedUser = new GridBagConstraints();
 		gbc_comboBox_linkedUser.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_linkedUser.gridx = 2;

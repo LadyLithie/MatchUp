@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.lithie.matchup.entities.Candidate;
-import fr.lithie.matchup.entities.Proposal;
+import fr.lithie.matchup.entities.Job;
 import fr.lithie.matchup.entities.Skill;
 
 public class Matching {
 
 	private double percentage;
-	private Proposal job;
+	private Job job;
 	private Candidate candidate;
 	// private ArrayList<Skill> jobSkills = new ArrayList<>();
 	// private ArrayList<Skill> candidateSkills = new ArrayList<>();
@@ -20,7 +20,7 @@ public class Matching {
 	 * @param job
 	 * @param candidate
 	 */
-	public Matching(Proposal job, Candidate candidate) {
+	public Matching(Job job, Candidate candidate) {
 		super();
 		this.job = job;
 		this.candidate = candidate;
@@ -37,7 +37,7 @@ public class Matching {
 	/**
 	 * @return the job
 	 */
-	public Proposal getJob() {
+	public Job getJob() {
 		return job;
 	}
 

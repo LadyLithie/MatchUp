@@ -31,7 +31,7 @@ public class CompanyView extends BaseView {
 	private MenuBar menuBar;
 
 	/**
-	 * Panel listing all the jobs proposed by the Enterprise
+	 * Panel listing all the jobs proposed by the Company
 	 * @return the panel_left
 	 */
 	public JPanel getPanel_left() {
@@ -39,7 +39,7 @@ public class CompanyView extends BaseView {
 	}
 
 	/**
-	 * Panel regrouping the Enterprise informations
+	 * Panel regrouping the Company informations
 	 * @return the panel_TopRight
 	 */
 	public JPanel getPanel_TopRight() {

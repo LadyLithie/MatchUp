@@ -48,7 +48,6 @@ public class CandidateDAO extends RegisteredUserDAO {
 			candidate.setLastname(rs.getString(LASTNAME));
 			candidate.setFirstname(rs.getString(FIRSTNAME));
 			candidate.setPhone(rs.getString(PHONE));
-			candidate.setBirstdate(rs.getString(BIRTHDAY));
 			candidate.setAddress(rs.getString(ADDRESS));
 			candidate.setEmail(rs.getString(MAIL));
 //			candidate.setAvatar((Blob) rs.getBinaryStream(PICTURE));
@@ -82,11 +81,6 @@ public class CandidateDAO extends RegisteredUserDAO {
 		result += "'" + candidate.getLastname() + "',";
 		result += "'" + candidate.getFirstname() + "',";
 		result += "'" + candidate.getPhone() + "',";
-		if (candidate.getBirstdate() != null) {
-			result += "'" + candidate.getBirstdate() + "',";
-		} else {
-			result += null + ",";
-		}
 		result += "'" + candidate.getAddress() + "',";
 		result += "'" + candidate.getEmail() + "',";
 		result += "'" + candidate.getAvatar() + "',";
@@ -107,7 +101,6 @@ public class CandidateDAO extends RegisteredUserDAO {
 		result += LASTNAME + " = '" + candidate.getLastname() + "',";
 		result += FIRSTNAME + " = '" + candidate.getFirstname() + "',";
 		result += PHONE + " = '" + candidate.getPhone() + "',";
-		result += BIRTHDAY + " = '" + candidate.getBirstdate() + "',";
 		result += ADDRESS + " = '" + candidate.getAddress() + "',";
 		result += MAIL + " = '" + candidate.getEmail() + "',";
 		result += PICTURE + " = '" + candidate.getAvatar() + "',";

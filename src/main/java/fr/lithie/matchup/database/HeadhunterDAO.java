@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.lithie.matchup.entities.Enterprise;
+import fr.lithie.matchup.entities.Company;
 import fr.lithie.matchup.entities.Headhunter;
 import fr.lithie.matchup.entities.Role;
 import fr.lithie.matchup.entities.Validity;
@@ -160,7 +160,7 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		EnterpriseDAO enterpriseDAO = new EnterpriseDAO();
 
 		for (Double id : enterpriseId) {
-			headhunter.getAssociates().add((Enterprise) enterpriseDAO.get(id));
+			headhunter.getAssociates().add((Company) enterpriseDAO.get(id));
 		}
 
 		return headhunter;
@@ -175,8 +175,8 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 	public int insertAssociates(Headhunter headhunter) {
 		int result = 0;
 		deleteAssociates(headhunter);
-		for (Enterprise enterprise : headhunter.getAssociates()) {
-			result += executeRequestUpdate("INSERT INTO " + ENTERPRISE_HEADHUNTER + " VALUES(" + enterprise.getId()
+		for (Company company : headhunter.getAssociates()) {
+			result += executeRequestUpdate("INSERT INTO " + ENTERPRISE_HEADHUNTER + " VALUES(" + company.getId()
 					+ "," + headhunter.getId() + ")");
 		}
 		return result;

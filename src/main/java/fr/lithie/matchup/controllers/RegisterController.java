@@ -16,9 +16,9 @@ import fr.lithie.matchup.database.CandidateDAO;
 import fr.lithie.matchup.database.EnterpriseDAO;
 import fr.lithie.matchup.database.HeadhunterDAO;
 import fr.lithie.matchup.entities.Candidate;
-import fr.lithie.matchup.entities.Enterprise;
+import fr.lithie.matchup.entities.Company;
 import fr.lithie.matchup.entities.Headhunter;
-import fr.lithie.matchup.entities.RegisteredUser;
+import fr.lithie.matchup.entities.User;
 import fr.lithie.matchup.entities.Role;
 import fr.lithie.matchup.managers.ViewsManager;
 import fr.lithie.matchup.views.RegisterView;
@@ -30,7 +30,7 @@ import fr.lithie.matchup.views.RegisterView;
  *
  */
 public class RegisterController extends BaseController {
-	private RegisteredUser user;
+	private User user;
 	
 
 	public RegisterController(JFrame frame) {
@@ -108,7 +108,7 @@ public class RegisterController extends BaseController {
 				user.setRole(Role.CANDIDATE);
 				} else if (view.getRdbtnEntreprise().isSelected()) {
 //				System.out.println("Entreprise");
-				user = new Enterprise();
+				user = new Company();
 				user.setLogin(view.getLogin().getInput().getText());
 				user.setEmail(view.getEmail().getInput().getText());
 				user.setPassword(pwd);

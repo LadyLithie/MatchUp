@@ -8,7 +8,7 @@ package fr.lithie.matchup.entities;
 import java.sql.Blob;
 import java.util.ArrayList;
 
-public class Enterprise extends RegisteredUser {
+public class Company extends User {
 	private String address;
 	// declare image as int ? chemin du fichier en String
 	private String siretNumber;
@@ -19,7 +19,7 @@ public class Enterprise extends RegisteredUser {
 	private String activity;
 	private ArrayList<Headhunter> associates;
 
-	private ArrayList<Proposal> jobs;
+	private ArrayList<Job> jobs;
 
 	/**
 	 * @return the address
@@ -92,7 +92,7 @@ public class Enterprise extends RegisteredUser {
 	/**
 	 * @return the jobs
 	 */
-	public ArrayList<Proposal> getJobs() {
+	public ArrayList<Job> getJobs() {
 		return jobs;
 	}
 
@@ -100,7 +100,7 @@ public class Enterprise extends RegisteredUser {
 	 * @param jobs
 	 *            the jobs to set
 	 */
-	public void setJobs(ArrayList<Proposal> jobs) {
+	public void setJobs(ArrayList<Job> jobs) {
 		this.jobs = jobs;
 	}
 	/**
@@ -162,7 +162,7 @@ public class Enterprise extends RegisteredUser {
 	/**
 	 * 
 	 */
-	public Enterprise() {
+	public Company() {
 		super();
 		associates = new ArrayList<>();
 		jobs = new ArrayList<>();
@@ -182,7 +182,7 @@ public class Enterprise extends RegisteredUser {
 	 * @param address
 	 * @param siretNumber
 	 */
-	public Enterprise(String login, String name, String phone, String email, String presentation,
+	public Company(String login, String name, String phone, String email, String presentation,
 			Blob avatar, String created_at, String updated_at, String address, String siretNumber) {
 		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		super.setRole(Role.COMPANY);
@@ -199,7 +199,7 @@ public class Enterprise extends RegisteredUser {
 	 */
 	@Override
 	public String toString() {
-		return "Enterprise [address=" + address + ", siretNumber=" + siretNumber + ", website=" + website + "]";
+		return "Company [address=" + address + ", siretNumber=" + siretNumber + ", website=" + website + "]";
 	}
 
 

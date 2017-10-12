@@ -9,7 +9,7 @@ import java.sql.Blob;
  * @author Audrey
  *
  */
-public class Administrator extends RegisteredUser {
+public class Administrator extends User {
 	private String firstname;
 	private String lastname;
 	

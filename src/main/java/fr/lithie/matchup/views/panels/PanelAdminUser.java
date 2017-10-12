@@ -6,7 +6,7 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import fr.lithie.matchup.entities.RegisteredUser;
+import fr.lithie.matchup.entities.User;
 
 import java.awt.GridLayout;
 import javax.swing.JLabel;
@@ -23,19 +23,19 @@ public class PanelAdminUser extends JPanel {
 	private JLabel lblEmail;
 //	private JLabel lblDateCreation;
 	private JLabel lblType;
-	private RegisteredUser user;
+	private User user;
 
 	/**
 	 * @return the user
 	 */
-	public RegisteredUser getUser() {
+	public User getUser() {
 		return user;
 	}
 
 	/**
 	 * @param user the user to set
 	 */
-	public void setUser(RegisteredUser user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

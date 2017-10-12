@@ -8,15 +8,15 @@ import java.util.List;
  * @author Audrey
  *
  */
-public class Headhunter extends RegisteredUser {
+public class Headhunter extends User {
 	
 	private String firstname;
 	private String lastname;
 	private String twitter;
 	private String linkedin;
 	
-	private ArrayList<Proposal> jobs;
-	private ArrayList<Enterprise> associates;
+	private ArrayList<Job> jobs;
+	private ArrayList<Company> associates;
 	
 	/**
 	 * @return the linkedin
@@ -78,28 +78,28 @@ public class Headhunter extends RegisteredUser {
 	/**
 	 * @return the jobs
 	 */
-	public List<Proposal> getJobs() {
+	public List<Job> getJobs() {
 		return jobs;
 	}
 
 	/**
 	 * @param list the jobs to set
 	 */
-	public void setJobs(List<Proposal> list) {
-		this.jobs = (ArrayList<Proposal>) list;
+	public void setJobs(List<Job> list) {
+		this.jobs = (ArrayList<Job>) list;
 	}
 
 	/**
 	 * @return the associates
 	 */
-	public ArrayList<Enterprise> getAssociates() {
+	public ArrayList<Company> getAssociates() {
 		return associates;
 	}
 
 	/**
 	 * @param associates the associates to set
 	 */
-	public void setAssociates(ArrayList<Enterprise> associates) {
+	public void setAssociates(ArrayList<Company> associates) {
 		this.associates = associates;
 	}
 	

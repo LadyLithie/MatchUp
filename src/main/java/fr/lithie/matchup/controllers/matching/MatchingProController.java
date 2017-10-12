@@ -9,22 +9,22 @@ import javax.swing.JFrame;
 import org.omg.PortableInterceptor.USER_EXCEPTION;
 
 import fr.lithie.matchup.controllers.BaseController;
-import fr.lithie.matchup.entities.Enterprise;
+import fr.lithie.matchup.entities.Company;
 import fr.lithie.matchup.entities.Headhunter;
-import fr.lithie.matchup.entities.Proposal;
-import fr.lithie.matchup.entities.RegisteredUser;
+import fr.lithie.matchup.entities.Job;
+import fr.lithie.matchup.entities.User;
 import fr.lithie.matchup.managers.ViewsManager;
 import fr.lithie.matchup.views.professionalMatching.MatchingProView;
 
 public class MatchingProController extends BaseController {
 
-	private RegisteredUser user;
-	private Enterprise enterprise;
+	private User user;
+	private Company company;
 	private Headhunter headhunter;
-	private ArrayList<Proposal> jobsListEnterprise = new ArrayList<>();
-	private ArrayList<Proposal> jobsListHeadhunter = new ArrayList<>();
+	private ArrayList<Job> jobsListEnterprise = new ArrayList<>();
+	private ArrayList<Job> jobsListHeadhunter = new ArrayList<>();
 	
-	public MatchingProController (JFrame frame, Enterprise enterprise) {
+	public MatchingProController (JFrame frame, Company company) {
 		super.frame = frame;
 		super.view = new MatchingProView(this.frame);
 	}
@@ -58,8 +58,8 @@ public class MatchingProController extends BaseController {
 			public void actionPerformed(ActionEvent e) {
 				
 				switch (user.getClass().getSimpleName()) {
-				case "Enterprise":
-					ViewsManager.getInstance().next(new MatchingResultController(frame, enterprise));
+				case "Company":
+					ViewsManager.getInstance().next(new MatchingResultController(frame, company));
 					break;
 				case "Headhunter":
 					ViewsManager.getInstance().next(new MatchingResultController(frame, headhunter));
