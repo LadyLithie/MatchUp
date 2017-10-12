@@ -42,13 +42,13 @@ public class RegisteredUserDAO extends BaseDAO {
 	public User connection(String login, String password) {
 		User user = null;
 		//Test dans la table Entreprise
-		ResultSet rs = executeRequest("SELECT * FROM " + EnterpriseDAO.TABLE + " WHERE " + EnterpriseDAO.LOGIN +" = '" + login + "' AND " + EnterpriseDAO.PASSWORD + " = '" + password + "'");
+		ResultSet rs = executeRequest("SELECT * FROM " + CompanyDAO.TABLE + " WHERE " + CompanyDAO.LOGIN +" = '" + login + "' AND " + CompanyDAO.PASSWORD + " = '" + password + "'");
 		try {
 			if (rs.next()) {
 				user = new Company();
-				user.setId(rs.getDouble(EnterpriseDAO.ID));
-				EnterpriseDAO enterpriseDAO = new EnterpriseDAO();
-				user = (Company) enterpriseDAO.get(user.getId());
+				user.setId(rs.getDouble(CompanyDAO.ID));
+				CompanyDAO companyDAO = new CompanyDAO();
+				user = (Company) companyDAO.get(user.getId());
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

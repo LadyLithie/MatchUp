@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import fr.lithie.matchup.database.EnterpriseDAO;
+import fr.lithie.matchup.database.CompanyDAO;
 import fr.lithie.matchup.entities.Company;
 import fr.lithie.matchup.entities.Headhunter;
 import fr.lithie.matchup.entities.Job;
@@ -201,7 +201,7 @@ public class CompanyController extends BaseController {
 					user.setWebsite(vPresentation.getWebsitePanel().getInput().getText());
 					user.setPresentation(vPresentation.getTextAreaPresentation().getText());
 					
-					EnterpriseDAO eDao = new EnterpriseDAO();
+					CompanyDAO eDao = new CompanyDAO();
 					eDao.update(user);
 				}
 			}
@@ -268,7 +268,7 @@ public class CompanyController extends BaseController {
 					 * we must test if allready exist to add it's id
 					 * if not we may want to create a new one before adding it (login=first+last & pwd = random passay or ask for mailing?)
 					 */
-					EnterpriseDAO eDao = new EnterpriseDAO();
+					CompanyDAO eDao = new CompanyDAO();
 					eDao.insertHeadhunter(user);
 				}
 			}

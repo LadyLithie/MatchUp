@@ -29,7 +29,7 @@ import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 
 import fr.lithie.matchup.database.AdministratorDAO;
 import fr.lithie.matchup.database.CandidateDAO;
-import fr.lithie.matchup.database.EnterpriseDAO;
+import fr.lithie.matchup.database.CompanyDAO;
 import fr.lithie.matchup.database.HeadhunterDAO;
 import fr.lithie.matchup.database.SkillDAO;
 import fr.lithie.matchup.database.base.BaseDAO;
@@ -107,7 +107,7 @@ public class AdminController extends BaseController {
 		 */
 		createListUsers(new AdministratorDAO(), v);
 		createListUsers(new HeadhunterDAO(), v);
-		createListUsers(new EnterpriseDAO(), v);
+		createListUsers(new CompanyDAO(), v);
 		createListUsers(new CandidateDAO(), v);
 
 	}
@@ -256,7 +256,7 @@ public class AdminController extends BaseController {
 							// DAO with instance :(
 							BaseDAO dao;
 							if (user instanceof Company) {
-								dao = new EnterpriseDAO();
+								dao = new CompanyDAO();
 								dao.update(user);
 							} else if (user instanceof Headhunter) {
 								dao = new HeadhunterDAO();
@@ -310,7 +310,7 @@ public class AdminController extends BaseController {
 						// DAO with instance :(
 						BaseDAO dao;
 						if (user instanceof Company) {
-							dao = new EnterpriseDAO();
+							dao = new CompanyDAO();
 							dao.update(user);
 						} else if (user instanceof Headhunter) {
 							dao = new HeadhunterDAO();

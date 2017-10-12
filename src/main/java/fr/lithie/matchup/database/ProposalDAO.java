@@ -50,7 +50,7 @@ public class ProposalDAO extends BaseDAO {
 				job.setName(resultSet.getString(NAME));
 				job.setPresentation(resultSet.getString(PRESENTATION));
 				job.setLocalization(resultSet.getString(ADDRESS));
-				EnterpriseDAO enterprise = new EnterpriseDAO();
+				CompanyDAO enterprise = new CompanyDAO();
 				job.setCompany((Company) enterprise.get(resultSet.getDouble(ENTERPRISE)));
 				ContractDAO cDao = new ContractDAO();
 				job.setContractType((ContractType) cDao.get(resultSet.getDouble(CONTRACT)));

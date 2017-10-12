@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 import javax.swing.JFrame;
 
 import fr.lithie.matchup.database.CandidateDAO;
-import fr.lithie.matchup.database.EnterpriseDAO;
+import fr.lithie.matchup.database.CompanyDAO;
 import fr.lithie.matchup.database.HeadhunterDAO;
 import fr.lithie.matchup.entities.Candidate;
 import fr.lithie.matchup.entities.Company;
@@ -62,7 +62,7 @@ public class RegisterController extends BaseController {
 						hDao.insert(user);
 						break;
 					case COMPANY:
-						EnterpriseDAO eDao = new EnterpriseDAO();
+						CompanyDAO eDao = new CompanyDAO();
 						eDao.insert(user);
 						break;
 					case CANDIDATE:

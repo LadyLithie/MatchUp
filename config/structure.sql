@@ -6,7 +6,7 @@ CREATE TABLE User(
         id               BigInt Auto_increment  NOT NULL ,
         login            Varchar (30) NOT NULL ,
         password         Varchar (25) NOT NULL ,
-        role             enum('ADMINISTRATOR','CANDIDATE','COMPANY'),
+        role             enum('ADMIN','CANDIDATE','COMPANY'),
         valid            enum('TRUE','FALSE') NOT NULL DEFAULT 'FALSE',
         created_at       Datetime ,
         updated_at       Datetime ,
@@ -23,7 +23,7 @@ CREATE TABLE User(
 CREATE TABLE Skills(
         id         BigInt Auto_increment  NOT NULL ,
         name       Varchar (100) ,
-        skill_type Varchar (100) ,
+        type       Varchar (100) ,
         PRIMARY KEY (id )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -33,13 +33,14 @@ CREATE TABLE Skills(
 #------------------------------------------------------------
 
 CREATE TABLE Administrator(
-        id              BigInt NOT NULL ,
-        lastname_admin  Varchar (25) ,
-        firstname_admin Varchar (25) ,
-        mail_admin      Varchar (25) NOT NULL ,
-        phone_admin     Varchar (25 ,
-        image           blob ,
-        PRIMARY KEY (id),
+  CREATE TABLE Administrator(
+          id        BigInt NOT NULL ,
+          lastname  Varchar (25) NOT NULL ,
+          firstname Varchar (25) NOT NULL ,
+          mail      Varchar (25) ,
+          phone     Varchar (25) ,
+          image     Blob ,
+          PRIMARY KEY (id )
         FOREIGN KEY (id) REFERENCES User(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -59,9 +60,7 @@ CREATE TABLE Job(
         Location_id   Int NOT NULL ,
         PRIMARY KEY (id )
         CONSTRAINT fk_job_location FOREIGN KEY (Location_id) REFERENCES location(id),
-
         CONSTRAINT fk_job_company FOREIGN KEY (Company_id) REFERENCES enterprise(id),
-
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -74,10 +73,10 @@ CREATE TABLE Company(
         name         Varchar (255) ,
         mail         Varchar (50) ,
         description  text ,
-        company_logo blob ,
+        logo         blob ,
         website      Varchar (100) ,
         siret        Varchar(14)
-        PRIMARY KEY (id ),
+        PRIMARY KEY (id),
         FOREIGN KEY (id) REFERENCES User(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -87,14 +86,13 @@ CREATE TABLE Company(
 #------------------------------------------------------------
 
 CREATE TABLE Candidate(
-        id         BigInt Auto_increment  NOT NULL ,
-        lastname   Varchar (100) ,
-        firstname  Varchar (100) ,
-        mail       Varchar (100) ,
-        picture    Varchar (255) ,
-        created_at Datetime NOT NULL ,
-        updated_at Datetime NOT NULL ,
-        PRIMARY KEY (id ),
+        id            BigInt Auto_increment  NOT NULL ,
+        lastname      Varchar (25) ,
+        firstname     Varchar (25) ,
+        mail          Varchar (100) ,
+        presentation  text ,
+        picture       blob ,
+        PRIMARY KEY (id),
         FOREIGN KEY (id) REFERENCES User(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -109,7 +107,7 @@ CREATE TABLE Location(
         city    Varchar (50) ,
         country Varchar (50) ,
         zipcode Varchar (6) ,
-        PRIMARY KEY (id )
+        PRIMARY KEY (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -118,10 +116,12 @@ CREATE TABLE Location(
 #------------------------------------------------------------
 
 CREATE TABLE SocialNetwork(
-        id   BigInt Auto_increment  NOT NULL ,
-        link Text ,
-        site Varchar (25) ,
-        PRIMARY KEY (id )
+        id      BigInt Auto_increment  NOT NULL ,
+        link    Text ,
+        site    Varchar (25) ,
+        user_id BigInt NOT NULL ,
+        PRIMARY KEY (id)
+        CONSTRAINT fk_sn_user    FOREIGN KEY (user_id) REFERENCES User(id),
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -132,7 +132,7 @@ CREATE TABLE SocialNetwork(
 CREATE TABLE candidate_skill(
         candidate_id  BigInt NOT NULL ,
         skill_id      BigInt NOT NULL ,
-        PRIMARY KEY (candidate_id ,skill_id ),
+        PRIMARY KEY (candidate_id ,skill_id),
         CONSTRAINT fk_cs_candidate FOREIGN KEY (candidate_id) REFERENCES candidate(id),
       	CONSTRAINT fk_cs_skill FOREIGN KEY (skill_id) REFERENCES skill(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -148,17 +148,4 @@ CREATE TABLE job_skill(
         PRIMARY KEY (skill_id, job_id),
         CONSTRAINT fk_cs_job FOREIGN KEY (job_id) REFERENCES Job(id),
       	CONSTRAINT fk_cs_skill FOREIGN KEY (skill_id) REFERENCES skill(id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-#------------------------------------------------------------
-# Table: User_Network
-#------------------------------------------------------------
-
-CREATE TABLE User_Network(
-        user_id          BigInt NOT NULL ,
-        socialNetwork_id BigInt NOT NULL ,
-        PRIMARY KEY (user_id , socialNetwork_id ),
-      	CONSTRAINT fk_un_user    FOREIGN KEY (user_id) REFERENCES User(id),
-      	CONSTRAINT fk_un_network FOREIGN KEY (socialNetwork_id) REFERENCES SocialNetwork(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

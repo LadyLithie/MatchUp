@@ -157,10 +157,10 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 			e.printStackTrace();
 		}
 
-		EnterpriseDAO enterpriseDAO = new EnterpriseDAO();
+		CompanyDAO companyDAO = new CompanyDAO();
 
 		for (Double id : enterpriseId) {
-			headhunter.getAssociates().add((Company) enterpriseDAO.get(id));
+			headhunter.getAssociates().add((Company) companyDAO.get(id));
 		}
 
 		return headhunter;
