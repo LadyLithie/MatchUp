@@ -16,19 +16,13 @@ import fr.lithie.matchup.entities.base.BaseEntity;
 public class CandidateDAO extends UserDAO {
 	
 	public static final String TABLE = "candidate";
-	public static final String ID = "id_candidate";
-	public static final String LASTNAME = "lastname_candidate";
-	public static final String FIRSTNAME = "firstname_candidate";
-	public static final String PHONE = "phone_candidate";
-	public static final String BIRTHDAY = "birthday_candidate";
-	public static final String ADDRESS = "address_candidate";
-	public static final String MAIL = "mail_candidate";
-	public static final String PICTURE = "picture_candidate";
-	public static final String PRESENTATION = "presentation_candidate";
-	public static final String LOGIN = "login_candidate";
-	public static final String PASSWORD = "password_candidate";
-	public static final String ROLE = "role_candidate";
-	public static final String VALID = "valid";
+	public static final String ID = "id";
+	public static final String LASTNAME = "lastname";
+	public static final String FIRSTNAME = "firstname";
+	public static final String PHONE = "phone";
+	public static final String MAIL = "mail";
+	public static final String PICTURE = "picture";
+	public static final String PRESENTATION = "presentation";
 
 	public static final String CANDIDATE_SKILL = "candidate_skill";
 	public static final String ID_CANDIDATE = "candidate_id";
@@ -48,7 +42,7 @@ public class CandidateDAO extends UserDAO {
 			candidate.setLastname(rs.getString(LASTNAME));
 			candidate.setFirstname(rs.getString(FIRSTNAME));
 			candidate.setPhone(rs.getString(PHONE));
-			candidate.setAddress(rs.getString(ADDRESS));
+//			candidate.setAddress(rs.getString(ADDRESS));
 			candidate.setEmail(rs.getString(MAIL));
 //			candidate.setAvatar((Blob) rs.getBinaryStream(PICTURE));
 			candidate.setAvatar(rs.getBlob(PICTURE));
@@ -101,14 +95,9 @@ public class CandidateDAO extends UserDAO {
 		result += LASTNAME + " = '" + candidate.getLastname() + "',";
 		result += FIRSTNAME + " = '" + candidate.getFirstname() + "',";
 		result += PHONE + " = '" + candidate.getPhone() + "',";
-		result += ADDRESS + " = '" + candidate.getAddress() + "',";
 		result += MAIL + " = '" + candidate.getEmail() + "',";
 		result += PICTURE + " = '" + candidate.getAvatar() + "',";
-		result += PRESENTATION + " = '" + candidate.getPresentation() +"',";
-		result += LOGIN + " = '" + candidate.getLogin() + "',";
-		result += PASSWORD + " = '" + candidate.getPassword() + "',";
-		result += ROLE + " = '" + candidate.getRole() + "'";
-		result += VALID + " = '" + candidate.getValid() + "'";
+		result += PRESENTATION + " = '" + candidate.getPresentation() +"'";
 
 		return result;
 	}

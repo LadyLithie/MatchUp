@@ -24,6 +24,7 @@ public abstract class User extends BaseEntity {
 	//Temporary
 	private String password;
 	private Validity valid;
+	private Location address;
 	
 	/**
 	 * @return the valid
@@ -175,24 +176,32 @@ public abstract class User extends BaseEntity {
 	 * Full constructor
 	 * @param login
 	 * @param name
+	 * @param role
 	 * @param phone
 	 * @param email
 	 * @param presentation
 	 * @param avatar
 	 * @param created_at
 	 * @param updated_at
+	 * @param password
+	 * @param valid
+	 * @param address
 	 */
-	public User(String login, String name, String phone, String email,
-			String presentation, Blob avatar, String created_at, String updated_at) {
+	public User(String login, String name, Role role, String phone, String email, String presentation, Blob avatar,
+			String created_at, String updated_at, String password, Validity valid, Location address) {
 		super();
 		this.login = login;
 		this.name = name;
+		this.role = role;
 		this.phone = phone;
 		this.email = email;
 		this.presentation = presentation;
 		this.avatar = avatar;
 		this.created_at = created_at;
 		this.updated_at = updated_at;
+		this.password = password;
+		this.valid = valid;
+		this.address = address;
 	}
 	
 	
@@ -211,6 +220,7 @@ public abstract class User extends BaseEntity {
 				+ ", updated_at=" + updated_at + ", password=" + password + "]";
 	}
 
+
 	/**
 	 * @return the role
 	 */
@@ -223,6 +233,20 @@ public abstract class User extends BaseEntity {
 	 */
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	/**
+	 * @return the address
+	 */
+	public Location getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(Location address) {
+		this.address = address;
 	}
 
 	

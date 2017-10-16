@@ -14,10 +14,8 @@ import javax.swing.JFrame;
 
 import fr.lithie.matchup.database.CandidateDAO;
 import fr.lithie.matchup.database.CompanyDAO;
-import fr.lithie.matchup.database.HeadhunterDAO;
 import fr.lithie.matchup.entities.Candidate;
 import fr.lithie.matchup.entities.Company;
-import fr.lithie.matchup.entities.Headhunter;
 import fr.lithie.matchup.entities.User;
 import fr.lithie.matchup.entities.Role;
 import fr.lithie.matchup.managers.ViewsManager;
@@ -57,10 +55,6 @@ public class RegisterController extends BaseController {
 				if (getValidRegister(view)) {
 					System.out.println("Utilisateur enregistré : ");
 					switch (user.getRole()) {
-					case HEADHUNTER:
-						HeadhunterDAO hDao = new HeadhunterDAO();
-						hDao.insert(user);
-						break;
 					case COMPANY:
 						CompanyDAO eDao = new CompanyDAO();
 						eDao.insert(user);
@@ -113,13 +107,6 @@ public class RegisterController extends BaseController {
 				user.setEmail(view.getEmail().getInput().getText());
 				user.setPassword(pwd);
 				user.setRole(Role.COMPANY);
-				} else if (view.getRdbtnRecruteur().isSelected()) {
-//				System.out.println("Recruteur");
-				user = new Headhunter();
-				user.setLogin(view.getLogin().getInput().getText());
-				user.setEmail(view.getEmail().getInput().getText());
-				user.setPassword(pwd);
-				user.setRole(Role.HEADHUNTER);
 			} else {
 				System.err.println("choisissez un type d'utilisateur");
 			}

@@ -23,7 +23,6 @@ public class Job extends BaseEntity {
 	private ContractType contractType;  
 	private Location localization;
 	private Company company;
-	private Headhunter headhunter;
 	private List<Skill> skills;
 	
 	/**
@@ -136,18 +135,7 @@ public class Job extends BaseEntity {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
-	/**
-	 * @return the headhunter
-	 */
-	public Headhunter getHeadhunter() {
-		return headhunter;
-	}
-	/**
-	 * @param headhunter the headhunter to set
-	 */
-	public void setHeadhunter(Headhunter headhunter) {
-		this.headhunter = headhunter;
-	}
+
 	/**
 	 * @return the skills
 	 */
@@ -184,7 +172,7 @@ public class Job extends BaseEntity {
 	public String toString() {
 		return "Job [name=" + name + ", presentation=" + presentation + ", createdAt=" + createdAt + ", updatedAt="
 				+ updatedAt + ", contractType=" + contractType + ", localization=" + localization + ", company="
-				+ company + ", headhunter=" + headhunter + ", skills=" + skills + "]";
+				+ company + ", skills=" + skills + "]";
 
 	}
 }
