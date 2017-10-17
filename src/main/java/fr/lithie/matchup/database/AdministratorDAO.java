@@ -11,17 +11,13 @@ import fr.lithie.matchup.entities.base.BaseEntity;
 public class AdministratorDAO extends UserDAO {
 	
 	public static final String TABLE ="administrator";
-	public static final String ID ="id_admin";
-	public static final String LASTNAME = "lastname_admin";
-	public static final String FIRSTNAME = "firstname_admin";
-	public static final String MAIL = "mail_admin";
-	public static final String PHONE = "phone_admin";
-	public static final String AVATAR = "logo_admin";
-	public static final String ROLE = "role_admin";
-	public static final String LOGIN = "login_admin";
-	public static final String PASSWORD = "password_admin";
-	public static final String VALID = "valid";
-	
+	public static final String ID ="id";
+	public static final String LASTNAME = "lastname";
+	public static final String FIRSTNAME = "firstname";
+	public static final String MAIL = "mail";
+	public static final String PHONE = "phone";
+	public static final String AVATAR = "image";
+	private UserDAO uDao = new UserDAO();
 	
 	public AdministratorDAO() {
 		super(TABLE, ID);
@@ -31,23 +27,16 @@ public class AdministratorDAO extends UserDAO {
 	@Override
 	public BaseEntity parseToObject(ResultSet resultSet) {
 		Administrator admin = new Administrator();
+		UserDAO uDao = new UserDAO();
 		
 		try {
-			admin.setId(resultSet.getDouble(ID));
+			admin = (Administrator) uDao.get(resultSet.getDouble(ID));
 			admin.setLastname(resultSet.getString(LASTNAME));
 			admin.setFirstname(resultSet.getString(FIRSTNAME));
 			admin.setEmail(resultSet.getString(MAIL));
 			admin.setPhone(resultSet.getString(PHONE));
 			admin.setAvatar(resultSet.getBlob(AVATAR));
-			if (resultSet.getString(ROLE).equals("admin")) {
-				admin.setRole(Role.ADMIN);
-			} else {
-				admin.setRole(Role.valueOf(resultSet.getString(ROLE)));
-			}
-			admin.setLogin(resultSet.getString(LOGIN));
-			admin.setPassword(resultSet.getString(PASSWORD));
 			admin.setName(admin.getFirstname() + " " + admin.getLastname());
-			admin.setValid(Validity.valueOf(resultSet.getString(VALID)));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,17 +48,17 @@ public class AdministratorDAO extends UserDAO {
 
 	@Override
 	public String parseToString(BaseEntity item) {
-		String res = "null,";
 		Administrator admin = (Administrator) item;
+
+		uDao.insert(admin);
+		//might need test to confirm user insertion?
+		String res = ""+admin.getId()+",";
 		
 		res += "'"+admin.getLastname()+"',";
 		res += "'"+admin.getFirstname()+"',";
 		res += "'"+admin.getEmail()+"',";
 		res += "'"+admin.getPhone()+"',";
-		res += "'"+admin.getRole()+"',";
-		res += "'"+admin.getLogin()+"',";
-		res += "'"+admin.getPassword()+"',";
-		res += "'"+admin.getValid()+"'";
+		res += "null";
 
 		return res;
 	}
@@ -77,16 +66,15 @@ public class AdministratorDAO extends UserDAO {
 	@Override
 	public String parseUpdateToString(BaseEntity item) {
 		String res = "";
+		uDao.update(item);
+
 		Administrator admin = (Administrator) item;
-		
+				
 		res += FIRSTNAME + " = '"+admin.getFirstname()+"',";
 		res += LASTNAME + " = '"+admin.getLastname()+"',";
 		res += MAIL + " = '"+admin.getEmail()+"',";
 		res += PHONE + " = '"+admin.getPhone()+"',";
-		res += ROLE + " = '"+admin.getRole()+"',";
-		res += LOGIN + " = '"+admin.getLogin()+"',";
-		res += PASSWORD + " = '"+admin.getPassword()+"',";
-		res += VALID + " = '"+admin.getValid()+"'";
+		res += AVATAR + " = '"+admin.getAvatar()+"'";
 
 		return res;
 	}
